@@ -1,11 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicare</title>
+    <link rel="stylesheet" href="accueil.css">
 </head>
 <body>
-    <h1>Medicare</h1>
-    <p>Modif eliott</p>
+<div class="wrapper">
+    <header>
+        <h1>Medicare</h1>
+    </header>
+
+    <nav>
+        <form>
+            <ul>
+                <li><input type="submit" name="accueil" value="Accueil" onclick="location.href='#accueil'"></li>
+                <li><input type="submit" name="tout-parcourir" value="Tout Parcourir" onclick="location.href='#tout-parcourir'"></li>
+                <li><input type="submit" name="recherche" value="Recherche" onclick="location.href='#recherche'"></li>
+                <li><input type="submit" name="rendez-vous" value="Rendez-vous" onclick="location.href='#rendez-vous'"></li>
+                <li><input type="submit" name="votre-compte" value="Votre Compte" onclick="location.href='#votre-compte'"></li>
+            </ul>
+        </form>
+    </nav>
+
+    <section id="infos">
+        <h2>Informations sur les onglets de navigation</h2>
+        <div class="info-box">
+            <h3>Accueil</h3>
+            <p>Découvrez notre page d'accueil avec les dernières actualités et informations de notre centre médical.</p>
+        </div>
+        <div class="info-box">
+            <h3>Tout Parcourir</h3>
+            <p>Parcourez l'ensemble des services et spécialités offerts par Medicare.</p>
+        </div>
+        <div class="info-box">
+            <h3>Recherche</h3>
+            <p>Utilisez notre outil de recherche pour trouver rapidement des informations spécifiques.</p>
+        </div>
+        <div class="info-box">
+            <h3>Rendez-vous</h3>
+            <p>Planifiez et gérez vos rendez-vous avec nos spécialistes en ligne.</p>
+        </div>
+        <div class="info-box">
+            <h3>Votre Compte</h3>
+            <p>Accédez à votre compte personnel pour consulter et mettre à jour vos informations.</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>Contactez-nous: <a href="mailto:contact@medicare.com">contact@medicare.com</a> | Téléphone: 01 23 45 67 89</p>
+    </footer>
+</div>
 </body>
 </html>
