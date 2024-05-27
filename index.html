@@ -2,55 +2,109 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medicare</title>
-    <link rel="stylesheet" href="accueil.css">
+    <title>Medicare: Accueil</title>
+    <link rel="stylesheet" href="styleaccueil.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="accueil.js" defer></script>
 </head>
 <body>
-<div class="wrapper">
-    <header>
-        <h1>Medicare</h1>
-    </header>
-
-    <nav>
-        <form>
+<header>
+    <div class="header-content">
+        <img src="logo.png" alt="Medicare Logo" class="logo">
+        <nav class="main-nav">
             <ul>
-                <li><input type="submit" name="accueil" value="Accueil" onclick="location.href='#accueil'"></li>
-                <li><input type="submit" name="tout-parcourir" value="Tout Parcourir" onclick="location.href='#tout-parcourir'"></li>
-                <li><input type="submit" name="recherche" value="Recherche" onclick="location.href='#recherche'"></li>
-                <li><input type="submit" name="rendez-vous" value="Rendez-vous" onclick="location.href='#rendez-vous'"></li>
-                <li><input type="submit" name="votre-compte" value="Votre Compte" onclick="location.href='#votre-compte'"></li>
+                <li><a href="index.html" class="active">Accueil</a></li>
+                <li><a href="browse.html">Tout Parcourir</a></li>
+                <li><a href="search.html">Recherche</a></li>
+                <li><a href="appointments.html">Rendez-vous</a></li>
+                <li><a href="account.html">Votre Compte</a></li>
             </ul>
-        </form>
-    </nav>
+        </nav>
+    </div>
+</header>
+<main>
+    <div class="content-container"> <!-- Conteneur principal pour flexbox -->
+        <div class="welcome-faq-container"> <!-- Nouveau conteneur pour le contenu de bienvenue et FAQ -->
+            <div class="welcome-section">
+                <h1>Bienvenue à Medicare</h1>
+                <p>Votre santé, notre priorité. </p>
+                <p>Découvrez nos services et spécialistes.</p>
+                <button class="cta-button">Explorez maintenant</button>
+            </div>
+            <div class="faq-section">
+                <h2>FAQ</h2>
+                <details>
+                    <summary>Comment prendre rendez-vous?</summary>
+                    <p>Veuillez visiter notre page de contact ou utiliser notre application mobile.</p>
+                </details>
+                <details>
+                    <summary>Quels services offrez-vous?</summary>
+                    <p>Nous offrons une large gamme de services médicaux, y compris cardiologie, dermatologie et plus.</p>
+                </details>
+            </div>
+        </div>
 
-    <section id="infos">
-        <h2>Informations sur les onglets de navigation</h2>
-        <div class="info-box">
-            <h3>Accueil</h3>
-            <p>Découvrez notre page d'accueil avec les dernières actualités et informations de notre centre médical.</p>
+        </section>
+        <div class="main-content">
+            <section class="carousel">
+                <div id="carrousel">
+                    <div class="header">Nos Spécialistes</div>
+                    <ul>
+                        <li class="active">
+                            <img src="addictologist.jpg" alt="Addictologue" />
+                            <div class="info">Dr. Alice Martin - Addictologie</div>
+                        </li>
+                        <li>
+                            <img src="andrologist.jpg" alt="Andrologue" />
+                            <div class="info">Dr. Marc Dupont - Andrologie</div>
+                        </li>
+                        <li>
+                            <img src="cardiologist.jpg" alt="Cardiologiste" />
+                            <div class="info">Dr. John Doe - Cardiologie</div>
+                        </li>
+                        <li>
+                            <img src="dermatologist.jpg" alt="Dermatologue" />
+                            <div class="info">Dr. Jane Smith - Dermatologie</div>
+                        </li>
+                        <li>
+                            <img src="gastroenterologist.jpg" alt="Gastro-entérologue" />
+                            <div class="info">Dr. Emily White - Gastro-Hépato-Entérologie</div>
+                        </li>
+                        <li>
+                            <img src="gynecologist.jpg" alt="Gynécologue" />
+                            <div class="info">Dr. Laura Thomas - Gynécologie</div>
+                        </li>
+                        <li>
+                            <img src="ist_specialist.jpg" alt="Spécialiste I.S.T." />
+                            <div class="info">Dr. Patrick Renault - I.S.T.</div>
+                        </li>
+                        <li>
+                            <img src="osteopath.jpg" alt="Ostéopathe" />
+                            <div class="info">Dr. Sophie Legrand - Ostéopathie</div>
+                        </li>
+                    </ul>
+                    <div class="controls">
+                        <span class="prev">&#9664;</span> <!-- Flèche gauche -->
+                        <span class="next">&#9654;</span> <!-- Flèche droite -->
+                    </div>
+                </div>
+            </section>
+            <section class="event-week">
+                <div class="event-header">Évènement de la Semaine</div>
+                <div class="event-content">
+                    <h3>Porte ouverte de Medicare</h3>
+                    <p>Rejoignez-nous pour une journée portes ouvertes et découvrez nos services et notre équipe.</p>
+                    <p>Date: <strong>25 Juin 2024</strong></p>
+                    <p>Lieu: <a href="https://maps.google.com/?q=Centre Médical Omnes Education" target="_blank">Centre Médical Omnes Education</a></p>
+                </div>
+            </section>
         </div>
-        <div class="info-box">
-            <h3>Tout Parcourir</h3>
-            <p>Parcourez l'ensemble des services et spécialités offerts par Medicare.</p>
-        </div>
-        <div class="info-box">
-            <h3>Recherche</h3>
-            <p>Utilisez notre outil de recherche pour trouver rapidement des informations spécifiques.</p>
-        </div>
-        <div class="info-box">
-            <h3>Rendez-vous</h3>
-            <p>Planifiez et gérez vos rendez-vous avec nos spécialistes en ligne.</p>
-        </div>
-        <div class="info-box">
-            <h3>Votre Compte</h3>
-            <p>Accédez à votre compte personnel pour consulter et mettre à jour vos informations.</p>
-        </div>
-    </section>
-
-    <footer>
-        <p>Contactez-nous: <a href="mailto:contact@medicare.com">contact@medicare.com</a> | Téléphone: 01 23 45 67 89</p>
-    </footer>
-</div>
+    </div>
+</main>
+<footer>
+    <div class="footer-content">
+        <p>Contactez-nous: <a href="mailto:info@medicare.com">info@medicare.com</a></p>
+    </div>
+</footer>
 </body>
 </html>
