@@ -40,11 +40,18 @@ if($db_found){
         $result = mysqli_query($db_handle, $sql);
         $row = mysqli_fetch_assoc($result);
         if($row && !$logged_in){
-            // Connexion réussie pour un médecin
-            echo "Connexion réussie en tant que médecin";
-            // Redirection vers une page de profil médecin
+            // Connexion réussie pour un client
+            $_SESSION['user_type'] = 'medecin'; // Stocker le type d'utilisateur dans la session
+
+            // Stocker les informations du client dans des variables PHP
+            $_SESSION['prenom'] = $row['prenom'];
+            $_SESSION['nom'] = $row['nom'];
+            $_SESSION['type'] = $row['type'];
+
+            // Redirection vers la page index_client.php
+            // header("Location: index.html");
             header("location: index_medecin.php");
-            $logged_in = true; // Marquer que l'utilisateur est connecté
+            exit(); // Assure que le script s'arrête après la redirection
         }
 
         // Vérification dans la table administrateur

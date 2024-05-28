@@ -6,11 +6,13 @@ if(isset($_SESSION['prenom']) && isset($_SESSION['nom']) && isset($_SESSION['typ
     $prenom = $_SESSION['prenom'];
     $nom = $_SESSION['nom'];
     $type = $_SESSION['type'];
-} else {
+}
+else {
     // Redirection vers la page de connexion si les informations du client ne sont pas disponibles
     header("Location: connexion.php");
     exit(); // Assure que le script s'arrête après la redirection
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +36,7 @@ if(isset($_SESSION['prenom']) && isset($_SESSION['nom']) && isset($_SESSION['typ
             position: absolute;
             background-color: #f9f9f9;
             min-width: 170px;
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.7);
             z-index: 1;
             border-radius: 8px; /* Arrondir les bords */
             padding-left: 10px; /* Déplacer le texte vers la droite */
@@ -76,7 +78,7 @@ if(isset($_SESSION['prenom']) && isset($_SESSION['nom']) && isset($_SESSION['typ
     <div class="content-container"> <!-- Conteneur principal pour flexbox -->
         <div class="welcome-faq-container"> <!-- Nouveau conteneur pour le contenu de bienvenue et FAQ -->
             <div class="welcome-section">
-                <h1>Bienvenue à Medicare <?php echo $prenom; ?></h1>
+                <h1>Bienvenue à Medicaire Docteur <?php echo $nom; ?></h1>
                 <p>Votre santé, notre priorité. </p>
                 <p>Découvrez nos services et spécialistes.</p>
                 <button class="cta-button">Explorez maintenant</button>
