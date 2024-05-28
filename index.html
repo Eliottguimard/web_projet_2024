@@ -1,11 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charse
-          t="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <title>Medicare: Accueil</title>
+    <link rel="stylesheet" href="styleaccueil.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="accueil.js" defer></script>
+
 </head>
 <body>
-    <h1>Medicare</h1>
+<header>
+    <div class="header-content">
+        <img src="logo.png" alt="Medicare Logo" class="logo">
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html" class="active">Accueil</a></li>
+                <li><a href="browse.html">Tout Parcourir</a></li>
+                <li><a href="search.html">Recherche</a></li>
+                <li><a href="appointments.html">Rendez-vous</a></li>
+                <li><a href="connexion.php">Se connecter</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<main>
+    <div class="content-container"> <!-- Conteneur principal pour flexbox -->
+        <div class="welcome-faq-container"> <!-- Nouveau conteneur pour le contenu de bienvenue et FAQ -->
+            <div class="welcome-section">
+                <h1>Bienvenue à Medicare</h1>
+                <p>Votre santé, notre priorité. </p>
+                <p>Découvrez nos services et spécialistes.</p>
+                <button class="cta-button">Explorez maintenant</button>
+            </div>
+            <div class="faq-section">
+                <h2>FAQ</h2>
+                <details>
+                    <summary>Comment prendre rendez-vous?</summary>
+                    <p>Veuillez visiter notre page de contact ou utiliser notre application mobile.</p>
+                </details>
+                <details>
+                    <summary>Quels services offrez-vous?</summary>
+                    <p>Nous offrons une large gamme de services médicaux, y compris cardiologie, dermatologie et plus.</p>
+                </details>
+            </div>
+        </div>
+
+        </section>
+        <div class="main-content">
+            <section class="carousel">
+                <div id="carrousel">
+                    <div class="header">Nos Spécialistes</div>
+                    <ul>
+                        <li class="active">
+                            <img src="addictologist.jpg" alt="Addictologue" />
+                            <div class="info">Dr. Alice Martin - Addictologie</div>
+                        </li>
+                        <!-- Autres éléments du carrousel -->
+                    </ul>
+                    <div class="controls">
+                        <span class="prev">&#9664;</span> <!-- Flèche gauche -->
+                        <span class="next">&#9654;</span> <!-- Flèche droite -->
+                    </div>
+                </div>
+            </section>
+            <section class="event-week">
+                <div class="event-header">Évènement de la Semaine</div>
+                <div class="event-content">
+                    <h3>Porte ouverte de Medicare</h3>
+                    <p>Rejoignez-nous pour une journée portes ouvertes et découvrez nos services et notre équipe.</p>
+                    <p>Date: <strong>25 Juin 2024</strong></p>
+                    <p>Lieu: <a href="https://maps.google.com/?q=Centre Médical Omnes Education" target="_blank">Centre Médical Omnes Education</a></p>
+                </div>
+            </section>
+        </div>
+    </div>
+</main>
+<footer>
+    <div class="footer-content">
+    <p>Contactez-nous: <a href="mailto:info@medicare.com">info@medicare.com</a></p>
+    <p>Téléphone : <a href="tel:+33171203622">01 71 20 36 22</a></p>
+    <p>Adresse : 123 Rue de la Santé, 75013 Paris, France</p>
+    <p><a href="https://www.google.com/maps?q=123+Rue+de+la+Sant%C3%A9,+75013+Paris,+France" target="_blank">Voir sur Google Maps</a></p>
+    </div>
+</footer>
 </body>
 </html>
