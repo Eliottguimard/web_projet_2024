@@ -99,18 +99,6 @@ header {
     background-color: #0056b3;
 }
 
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 20px;
-}
-
-.footer-content a {
-    color: #ccc;
-    text-decoration: none;
-}
-
 /* Organiser le contenu principal et la FAQ côte à côte */
 .main-content {
     display: flex;
@@ -127,6 +115,23 @@ footer {
     text-align: left; /* Alignement du texte à gauche */
     padding: 20px;
     margin-right: 20px; /* Espace entre les deux colonnes */
+}
+
+footer {
+    background-color: #87bfdc;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #e7e7e7;
+    margin-top: 20px; /* Ajout d'une marge pour espacer le footer des autres contenus */
+}
+
+.footer-content a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.footer-content p {
+    margin: 5px 0; /* Espacement entre les paragraphes du footer */
 }
 
 /* Ajustements pour la section FAQ */
