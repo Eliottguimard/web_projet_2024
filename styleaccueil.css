@@ -34,7 +34,7 @@ header {
     padding: 10px 20px;
 }
 .logo-header {
-    height: 50px; /* Taille du logo dans l'en-tête */
+    height: 75px; /* Taille du logo dans l'en-tête */
 }
 
 .medicare-text {
@@ -46,6 +46,15 @@ header {
 
 .logo {
     height: 50px;
+}
+
+.medicare-title {
+    font-family: 'Arial', sans-serif; /* Choisir la police spéciale pour la médecine */
+    font-size: 40px; /* Taille du texte */
+    margin: 0; /* Supprimer les marges par défaut */
+    padding-left: 0; /* Ajouter un peu d'espace à gauche pour l'équilibre */
+    color: #333; /* Couleur du texte */
+    line-height: 1; /* Espacement entre les lignes */
 }
 
 .main-nav ul {
@@ -66,7 +75,7 @@ header {
 
 .main-nav ul li a:hover, .main-nav ul li a.active {
     background-color: #f1f1f1;
-    color: #003167;
+    color: #080C50;
 }
 
 
@@ -163,20 +172,20 @@ footer {
 /* Nouveau conteneur pour le contenu de bienvenue et la FAQ */
 .welcome-faq-container {
     display: flex;
-    justify-content: space-between;
     width: 100%;
 }
 
 /* Styles ajustés pour la section de bienvenue pour s'assurer qu'elle n'occupe pas tout l'espace horizontalement */
 .welcome-section {
-    flex: 3; /* Donne plus d'espace à cette section */
+/* Donne plus d'espace à cette section */
+    padding-left: 120px;
     padding-right: 20px; /* Ajoute un peu d'espace entre les deux sections */
 }
 
 /* Ajustement pour la FAQ pour mieux s'aligner avec le reste du contenu */
 .faq-section {
-    flex: 1;
     padding: 20px;
+    padding-right: 30px;
     max-width: 350px; /* Limite la largeur de la FAQ pour ne pas être trop large */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
@@ -315,6 +324,7 @@ footer {
 
 .event-content {
     font-size: 16px;
+    padding: 5px;
 }
 
 .event-content h3 {
