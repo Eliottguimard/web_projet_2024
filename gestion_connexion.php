@@ -30,7 +30,8 @@ if($db_found){
             $_SESSION['type'] = $row['type'];
 
             // Redirection vers la page index_client.php
-            header("Location: index_client.php");
+           // header("Location: index.html");
+            header("location: index_client.php");
             exit(); // Assure que le script s'arrête après la redirection
         }
 
@@ -42,6 +43,7 @@ if($db_found){
             // Connexion réussie pour un médecin
             echo "Connexion réussie en tant que médecin";
             // Redirection vers une page de profil médecin
+            header("location: index_medecin.php");
             $logged_in = true; // Marquer que l'utilisateur est connecté
         }
 

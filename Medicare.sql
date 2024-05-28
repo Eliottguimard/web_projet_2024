@@ -33,40 +33,42 @@ CREATE TABLE medecin (
                          telephone VARCHAR(20),
                          email VARCHAR(100),
                          adresse VARCHAR(255),
-                         cv TEXT
+                         cv TEXT,
+                         login VARCHAR(100)	,
+                         mdp VARCHAR(100)
 );
 
-INSERT INTO medecin (nom, prenom, specialite, telephone, email, adresse, cv) VALUES
+INSERT INTO medecin (nom, prenom, specialite, telephone, email, adresse, cv, login, mdp) VALUES
 -- Médecins généralistes
-('Legrand', 'Sophie', 'Généraliste', '0612345678', 'sophie.legrand@example.com', '1 Rue de la Santé, Paris', 'Diplômée de la Faculté de Médecine de Paris. 10 ans d\'expérience en médecine générale.'),
-('Durand', 'Pierre', 'Généraliste', '0623456789', 'pierre.durand@example.com', '2 Avenue de la Santé, Lyon', 'Diplômé de la Faculté de Médecine de Lyon. 8 ans d\'expérience en médecine générale.'),
-('Martin', 'Julie', 'Généraliste', '0634567890', 'julie.martin@example.com', '3 Boulevard de la Santé, Marseille', 'Diplômée de la Faculté de Médecine de Marseille. 7 ans d\'expérience en médecine générale.'),
-('Bernard', 'Luc', 'Généraliste', '0645678901', 'luc.bernard@example.com', '4 Rue de la Santé, Toulouse', 'Diplômé de la Faculté de Médecine de Toulouse. 9 ans d\'expérience en médecine générale.'),
-('Petit', 'Marie', 'Généraliste', '0656789012', 'marie.petit@example.com', '5 Rue de la Santé, Nice', 'Diplômée de la Faculté de Médecine de Nice. 6 ans d\'expérience en médecine générale.'),
+('Legrand', 'Sophie', 'Généraliste', '0612345678', 'sophie.legrand@example.com', '1 Rue de la Santé, Paris', 'Diplômée de la Faculté de Médecine de Paris. 10 ans d\'expérience en médecine générale.','sophie.legrand@example.com','password111'),
+('Durand', 'Pierre', 'Généraliste', '0623456789', 'pierre.durand@example.com', '2 Avenue de la Santé, Lyon', 'Diplômé de la Faculté de Médecine de Lyon. 8 ans d\'expérience en médecine générale.','pierre.durand@example.com','password222'),
+('Martin', 'Julie', 'Généraliste', '0634567890', 'julie.martin@example.com', '3 Boulevard de la Santé, Marseille', 'Diplômée de la Faculté de Médecine de Marseille. 7 ans d\'expérience en médecine générale.','julie.martin@example.com','password333'),
+('Bernard', 'Luc', 'Généraliste', '0645678901', 'luc.bernard@example.com', '4 Rue de la Santé, Toulouse', 'Diplômé de la Faculté de Médecine de Toulouse. 9 ans d\'expérience en médecine générale.','luc.bernard@example.com','password444'),
+('Petit', 'Marie', 'Généraliste', '0656789012', 'marie.petit@example.com', '5 Rue de la Santé, Nice', 'Diplômée de la Faculté de Médecine de Nice. 6 ans d\'expérience en médecine générale.','marie.petit@example.com','password555'),
 
 -- Médecins spécialistes
-('Roux', 'Claire', 'Addictologie', '0667890123', 'claire.roux@example.com', '6 Rue de l\'Addiction, Paris', 'Diplômée de la Faculté de Médecine de Paris. 5 ans d\'expérience en addictologie.'),
-('Morel', 'Jean', 'Andrologie', '0678901234', 'jean.morel@example.com', '7 Rue de l\'Andrologie, Lyon', 'Diplômé de la Faculté de Médecine de Lyon. 10 ans d\'expérience en andrologie.'),
-('Lemoine', 'Alice', 'Cardiologie', '0689012345', 'alice.lemoine@example.com', '8 Rue du Coeur, Marseille', 'Diplômée de la Faculté de Médecine de Marseille. 12 ans d\'expérience en cardiologie.'),
-('Dufour', 'Marc', 'Dermatologie', '0690123456', 'marc.dufour@example.com', '9 Avenue de la Peau, Toulouse', 'Diplômé de la Faculté de Médecine de Toulouse. 15 ans d\'expérience en dermatologie.'),
-('Garcia', 'Emilie', 'Gastro-Hépato-Entérologie', '0610123456', 'emilie.garcia@example.com', '10 Boulevard de l\'Estomac, Nice', 'Diplômée de la Faculté de Médecine de Nice. 8 ans d\'expérience en gastro-entérologie.'),
-('Durand', 'Paul', 'Gynécologie', '0620123456', 'paul.durand@example.com', '11 Rue des Femmes, Paris', 'Diplômé de la Faculté de Médecine de Paris. 6 ans d\'expérience en gynécologie.'),
-('Lefevre', 'Julie', 'I.S.T.', '0630123456', 'julie.lefevre@example.com', '12 Avenue des Maladies, Lyon', 'Diplômée de la Faculté de Médecine de Lyon. 9 ans d\'expérience en I.S.T.'),
-('Mercier', 'Jacques', 'Ostéopathie', '0640123456', 'jacques.mercier@example.com', '13 Rue des Os, Marseille', 'Diplômé de l\'École d\'Ostéopathie de Marseille. Praticien en ostéopathie depuis 7 ans.');
+('Roux', 'Claire', 'Addictologie', '0667890123', 'claire.roux@example.com', '6 Rue de l\'Addiction, Paris', 'Diplômée de la Faculté de Médecine de Paris. 5 ans d\'expérience en addictologie.','claire.roux@example.com','password666'),
+('Morel', 'Jean', 'Andrologie', '0678901234', 'jean.morel@example.com', '7 Rue de l\'Andrologie, Lyon', 'Diplômé de la Faculté de Médecine de Lyon. 10 ans d\'expérience en andrologie.','jean.morel@example.com','password777'),
+('Lemoine', 'Alice', 'Cardiologie', '0689012345', 'alice.lemoine@example.com', '8 Rue du Coeur, Marseille', 'Diplômée de la Faculté de Médecine de Marseille. 12 ans d\'expérience en cardiologie.','alice.lemoine@example.com','password888'),
+('Dufour', 'Marc', 'Dermatologie', '0690123456', 'marc.dufour@example.com', '9 Avenue de la Peau, Toulouse', 'Diplômé de la Faculté de Médecine de Toulouse. 15 ans d\'expérience en dermatologie.','marc.dufour@example.com','password999'),
+('Garcia', 'Emilie', 'Gastro-Hépato-Entérologie', '0610123456', 'emilie.garcia@example.com', '10 Boulevard de l\'Estomac, Nice', 'Diplômée de la Faculté de Médecine de Nice. 8 ans d\'expérience en gastro-entérologie.','emilie.garcia@example.com','password101'),
+('Durand', 'Paul', 'Gynécologie', '0620123456', 'paul.durand@example.com', '11 Rue des Femmes, Paris', 'Diplômé de la Faculté de Médecine de Paris. 6 ans d\'expérience en gynécologie.','paul.durand@example.com','password102'),
+('Lefevre', 'Julie', 'I.S.T.', '0630123456', 'julie.lefevre@example.com', '12 Avenue des Maladies, Lyon', 'Diplômée de la Faculté de Médecine de Lyon. 9 ans d\'expérience en I.S.T.','julie.lefevre@example.com','password103'),
+('Mercier', 'Jacques', 'Ostéopathie', '0640123456', 'jacques.mercier@example.com', '13 Rue des Os, Marseille', 'Diplômé de l\'École d\'Ostéopathie de Marseille. Praticien en ostéopathie depuis 7 ans.','jacques.mercier@example.com','password104');
 
 CREATE TABLE administrateur (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(100),
-    prenom VARCHAR(100),
-    email VARCHAR(100),
-    telephone VARCHAR(20),
-    login VARCHAR(100),
-    mdp VARCHAR(100)
+                                id INT PRIMARY KEY AUTO_INCREMENT,
+                                nom VARCHAR(100),
+                                prenom VARCHAR(100),
+                                email VARCHAR(100),
+                                telephone VARCHAR(20),
+                                login VARCHAR(100),
+                                mdp VARCHAR(100)
 );
 
 INSERT INTO administrateur (nom, prenom, email, telephone, login, mdp) VALUES
-('Durand', 'Paul', 'paul.durand@example.com', '0712345678', 'paul.durand', 'adminpassword1'),
-('Lefevre', 'Julie', 'julie.lefevre@example.com', '0723456789', 'julie.lefevre', 'adminpassword2'),
-('Mercier', 'Jacques', 'jacques.mercier@example.com', '0734567890', 'jacques.mercier', 'adminpassword3'),
-('Garcia', 'Emilie', 'emilie.garcia@example.com', '0745678901', 'emilie.garcia', 'adminpassword4'),
-('Rousseau', 'Nicolas', 'nicolas.rousseau@example.com', '0756789012', 'nicolas.rousseau', 'adminpassword5');
+                                                                           ('Durand', 'Paul', 'paul.durand@example.com', '0712345678', 'paul.durand', 'adminpassword1'),
+                                                                           ('Lefevre', 'Julie', 'julie.lefevre@example.com', '0723456789', 'julie.lefevre', 'adminpassword2'),
+                                                                           ('Mercier', 'Jacques', 'jacques.mercier@example.com', '0734567890', 'jacques.mercier', 'adminpassword3'),
+                                                                           ('Garcia', 'Emilie', 'emilie.garcia@example.com', '0745678901', 'emilie.garcia', 'adminpassword4'),
+                                                                           ('Rousseau', 'Nicolas', 'nicolas.rousseau@example.com', '0756789012', 'nicolas.rousseau', 'adminpassword5');

@@ -1,16 +1,18 @@
 <?php
 session_start(); // Démarrer la session
 
-if (isset($_SESSION['prenom']) && isset($_SESSION['nom']) && isset($_SESSION['type'])) {
+// Vérifier si les informations du client sont stockées dans la session
+if(isset($_SESSION['prenom']) && isset($_SESSION['nom']) && isset($_SESSION['type'])){
     $prenom = $_SESSION['prenom'];
     $nom = $_SESSION['nom'];
     $type = $_SESSION['type'];
 } else {
-    // Rediriger vers la page de connexion si les variables de session ne sont pas définies
+    // Redirection vers la page de connexion si les informations du client ne sont pas disponibles
     header("Location: connexion.php");
-    exit();
-?>
+    exit(); // Assure que le script s'arrête après la redirection
 }
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
