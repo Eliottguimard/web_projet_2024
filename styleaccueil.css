@@ -146,7 +146,7 @@ footer {
 /* Ajustements pour la section FAQ */
 .faq-section {
     margin-top: 20px;
-    flex: 4; /* Moins d'espace que la section principale */
+    margin-left: 270px;
     padding: 20px;
     background: #f9f9f9; /* Fond distinct pour la FAQ */
     border-radius: 5px; /* Bordures arrondies */
