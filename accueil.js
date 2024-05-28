@@ -1,45 +1,32 @@
 document.addEventListener('DOMContentLoaded', function() {
-
+    var $carrousel = $('#carrousel');
+    var $imgs = $carrousel.find('li');
+    var currentIndex = 0;
+    var changeInterval = 5000; // Interval de changement de l'image en millisecondes
 
     // Initialisation du carrousel
-    initCarousel();
-
-
-
-    function initCarousel() {
-        var $carrousel = $('#carrousel'),
-            $img = $('#carrousel li'),
-            indexImg = $img.length - 1,
-            i = 0,
-            $currentImg = $img.eq(i);
-
-        $img.not('.active').css('opacity', '0');
-        $currentImg.addClass('active');
-
-        function changeImg(newIndex) {
-            $img.removeClass('active').css('opacity', '0');
-            $img.eq(newIndex).addClass('active').css('opacity', '1');
-            i = newIndex;
-        }
-
-        $carrousel.find('.controls .next').click(function(){
-            var nextIndex = i < indexImg ? i + 1 : 0;
-            changeImg(nextIndex);
-        });
-
-        $carrousel.find('.controls .prev').click(function(){
-            var prevIndex = i > 0 ? i - 1 : indexImg;
-            changeImg(prevIndex);
-        });
-
-        function slideImg(){
-            setTimeout(function(){
-                var nextIndex = i < indexImg ? i + 1 : 0;
-                changeImg(nextIndex);
-                slideImg();
-            }, 9000); // Change l'image toutes les 5 secondes
-        }
-
-        slideImg();
+    function displayCurrentImage() {
+        $imgs.removeClass('active').css('opacity', 0);
+        $imgs.eq(currentIndex).addClass('active').css('opacity', 1);
     }
+
+    function moveToNextImage() {
+        currentIndex = (currentIndex + 1) % $imgs.length;
+        displayCurrentImage();
+    }
+
+    function moveToPreviousImage() {
+        currentIndex = (currentIndex - 1 + $imgs.length) % $imgs.length;
+        displayCurrentImage();
+    }
+
+    // Contrôleurs pour le carrousel
+    $carrousel.find('.next').on('click', moveToNextImage);
+    $carrousel.find('.prev').on('click', moveToPreviousImage);
+
+    // Défilement automatique du carrousel
+    setInterval(moveToNextImage, changeInterval);
+
+    // Afficher la première image au chargement
+    displayCurrentImage();
 });
