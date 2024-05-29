@@ -70,7 +70,7 @@ if($db_found){
 
         // Si aucun utilisateur correspondant n'est trouvé
         if(!$logged_in){
-            $_SESSION['error_message'] = "*Utilisateur introuvable, veuillez resaisir les informations";
+            $_SESSION['error_message'] = "*Utilisateur introuvable, vous ne possédez peut-être pas de compte ? Créez en un";
             header("Location: connexion.php"); // Redirection vers la page de connexion
             exit(); // Assure que le script s'arrête après la redirection
         }

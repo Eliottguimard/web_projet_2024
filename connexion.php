@@ -82,8 +82,6 @@ session_start(); // Démarrer la session
     </div>
 </header>
     <div class="box-connexion">
-
-
         <form action="gestion_connexion.php" method="post">
             <h2>Connexion</h2>
             <label for="login">Login :</label><br>

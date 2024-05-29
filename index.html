@@ -7,6 +7,42 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="accueil.js" defer></script>
 
+    <style>
+        /* Styles pour le menu déroulant */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: white;
+        }
+
+    </style>
 </head>
 <body>
 <header>
@@ -20,7 +56,13 @@
                 <li><a href="browse.html">Tout Parcourir</a></li>
                 <li><a href="search.html">Recherche</a></li>
                 <li><a href="appointments.html">Rendez-vous</a></li>
-                <li><a href="connexion.php">Se connecter</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Votre compte</a>
+                    <div class="dropdown-content">
+                        <a href="connexion.php">Se connecter</a>
+                        <a href="creer_compte.php">Créez un compte</a>
+                    </div>
+                </li>
             </ul>
         </nav>
     </div>
@@ -105,10 +147,10 @@
 </main>
 <footer>
     <div class="footer-content">
-    <p>Contactez-nous: <a href="mailto:info@medicare.com">info@medicare.com</a></p>
-    <p>Téléphone : <a href="tel:+33171203622">01 71 20 36 22</a></p>
-    <p>Adresse : 123 Rue de la Santé, 75013 Paris, France</p>
-    <p><a href="https://www.google.com/maps?q=123+Rue+de+la+Sant%C3%A9,+75013+Paris,+France" target="_blank">Voir sur Google Maps</a></p>
+        <p>Contactez-nous: <a href="mailto:info@medicare.com">info@medicare.com</a></p>
+        <p>Téléphone : <a href="tel:+33171203622">01 71 20 36 22</a></p>
+        <p>Adresse : 123 Rue de la Santé, 75013 Paris, France</p>
+        <p><a href="https://www.google.com/maps?q=123+Rue+de+la+Sant%C3%A9,+75013+Paris,+France" target="_blank">Voir sur Google Maps</a></p>
     </div>
 </footer>
 </body>

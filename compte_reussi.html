@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleaccueil.css">
+    <title>Compte créé</title>
+
+    <style>
+
+        .box-compte-reussi {
+            margin-left: 15%;
+            margin-top: 5%;
+            padding: 20px;
+            width: 1000px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            background: #f9f9f9;
+
+            /*display: flex; *//* Ajout */
+            justify-content: center; /* Ajout */
+            align-items: center; /* Ajout */
+        }
+
+        footer {
+            background-color: #87bfdc;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #e7e7e7;
+            margin-top: 50px; /* Ajout d'une marge pour espacer le footer des autres contenus */
+        }
+
+        .footer-content a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .footer-content p {
+            margin: 5px 0; /* Espacement entre les paragraphes du footer */
+        }
+
+
+    </style>
+
+</head>
+<body>
+<header>
+    <div class="header-content">
+        <img src="logo.png" alt="Medicare Logo" class="logo">
+    </div>
+</header>
+<div class="box-compte-reussi">
+    <h2>Bravo, votre compte a été créé avec succès</h2>
+    <p><a href="connexion.php">Cliquez-ici pour vous connecter à votre compte</a></p>
+</div>
+<footer>
+    <div class="footer-content">
+        <p>Contactez-nous: <a href="mailto:info@medicare.com">info@medicare.com</a></p>
+        <p>Téléphone : <a href="tel:+33171203622">01 71 20 36 22</a></p>
+        <p>Adresse : 123 Rue de la Santé, 75013 Paris, France</p>
+        <p><a href="https://www.google.com/maps?q=123+Rue+de+la+Sant%C3%A9,+75013+Paris,+France" target="_blank">Voir sur Google Maps</a></p>
+    </div>
+</footer>
+
+</body>
+</html>
