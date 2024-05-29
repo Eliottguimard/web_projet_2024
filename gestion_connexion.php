@@ -10,7 +10,6 @@ $db_handle = mysqli_connect('localhost', 'root', '');
 $db_found = mysqli_select_db($db_handle, $database);
 
 if($db_found){
-
     if(isset($_POST['login']) && isset($_POST['mdp'])){
         $login = $_POST['login'];
         $mdp = $_POST['mdp'];
@@ -41,19 +40,8 @@ if($db_found){
         $row = mysqli_fetch_assoc($result);
         if($row && !$logged_in){
             // Connexion réussie pour un médecin
-            //echo "Connexion réussie en tant que médecin";
+            echo "Connexion réussie en tant que médecin";
             // Redirection vers une page de profil médecin
-            // Connexion réussie pour un client
-            $_SESSION['user_type'] = 'medecin'; // Stocker le type d'utilisateur dans la session
-
-            // Stocker les informations du client dans des variables PHP
-            $_SESSION['prenom'] = $row['prenom'];
-            $_SESSION['nom'] = $row['nom'];
-            $_SESSION['type'] = $row['type'];
-
-            // Redirection vers la page index_client.php
-            header("Location: index_client.php");
-            exit(); // Assure que le script s'arrête après la redirection
             $logged_in = true; // Marquer que l'utilisateur est connecté
         }
 
@@ -70,7 +58,7 @@ if($db_found){
 
         // Si aucun utilisateur correspondant n'est trouvé
         if(!$logged_in){
-            $_SESSION['error_message'] = "*Utilisateur introuvable, vous ne possédez peut-être pas de compte ? Créez en un";
+            $_SESSION['error_message'] = "*Utilisateur introuvable, veuillez resaisir les informations";
             header("Location: connexion.php"); // Redirection vers la page de connexion
             exit(); // Assure que le script s'arrête après la redirection
         }
