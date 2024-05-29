@@ -22,7 +22,7 @@ if($db_found){
         $row = mysqli_fetch_assoc($result);
         if($row && !$logged_in){
             // Connexion réussie pour un client
-            $_SESSION['user_type'] = 'client'; // Stocker le type d'utilisateur dans la session
+            $_SESSION['user_type'] = 'Client'; // Stocker le type d'utilisateur dans la session
 
             // Stocker les informations du client dans des variables PHP
             $_SESSION['prenom'] = $row['prenom'];
@@ -30,8 +30,7 @@ if($db_found){
             $_SESSION['type'] = $row['type'];
 
             // Redirection vers la page index_client.php
-           // header("Location: index.html");
-            header("location: index_client.php");
+            header("Location: index_client.php");
             exit(); // Assure que le script s'arrête après la redirection
         }
 
@@ -41,7 +40,7 @@ if($db_found){
         $row = mysqli_fetch_assoc($result);
         if($row && !$logged_in){
             // Connexion réussie pour un client
-            $_SESSION['user_type'] = 'medecin'; // Stocker le type d'utilisateur dans la session
+            $_SESSION['user_type'] = 'Médecin'; // Stocker le type d'utilisateur dans la session
 
             // Stocker les informations du client dans des variables PHP
             $_SESSION['prenom'] = $row['prenom'];
@@ -49,8 +48,7 @@ if($db_found){
             $_SESSION['type'] = $row['type'];
 
             // Redirection vers la page index_client.php
-            // header("Location: index.html");
-            header("location: index_medecin.php");
+            header("Location: index_medecin.php");
             exit(); // Assure que le script s'arrête après la redirection
         }
 
@@ -59,11 +57,19 @@ if($db_found){
         $result = mysqli_query($db_handle, $sql);
         $row = mysqli_fetch_assoc($result);
         if($row && !$logged_in){
-            // Connexion réussie pour un administrateur
-            echo "Connexion réussie en tant qu'administrateur";
-            // Redirection vers une page de profil administrateur
-            $logged_in = true; // Marquer que l'utilisateur est connecté
+            // Connexion réussie pour un client
+            $_SESSION['user_type'] = 'Admin'; // Stocker le type d'utilisateur dans la session
+
+            // Stocker les informations du client dans des variables PHP
+            $_SESSION['prenom'] = $row['prenom'];
+            $_SESSION['nom'] = $row['nom'];
+            $_SESSION['type'] = $row['type'];
+
+            // Redirection vers la page index_client.php
+            header("Location: index_admin.php");
+            exit(); // Assure que le script s'arrête après la redirection
         }
+
 
         // Si aucun utilisateur correspondant n'est trouvé
         if(!$logged_in){
