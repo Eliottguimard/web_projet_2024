@@ -55,7 +55,7 @@ else {
         <nav class="main-nav">
             <ul>
                 <li><a href="index_client.php" class="active">Accueil</a></li>
-                <li><a href="toutparcourir.php">Tout Parcourir</a></li>
+                <li><a href="toutparcourir_client.php">Tout Parcourir</a></li>
                 <li><a href="search.html">Recherche</a></li>
                 <li><a href="appointments.html">Rendez-vous</a></li>
                 <!-- Remplacer "connexion.php" par "votre_compte.php" -->

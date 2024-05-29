@@ -74,8 +74,8 @@ else {
         <img src="logo.png" alt="Medicare Logo" class="logo">
         <nav class="main-nav">
             <ul>
-                <li><a href="index_client.php" class="active">Accueil</a></li>
-                <li><a href="toutparcourir.php">Tout Parcourir</a></li>
+                <li><a href="index_medecin.php" class="active">Accueil</a></li>
+                <li><a href="toutparcourir_medecin.php">Tout Parcourir</a></li><!--il faudrait un parcourir medecin ou autre onglet-->
                 <li><a href="search.html">Recherche</a></li>
                 <li><a href="appointments.html">Rendez-vous</a></li>
                 <li class="dropdown">
