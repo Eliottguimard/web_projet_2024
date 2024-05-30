@@ -104,7 +104,7 @@ $type = $_SESSION['type'];
         <nav class="main-nav">
             <ul>
                 <li><a href="index_client.php" >Accueil</a></li>
-                <li><a href="toutparcourir.php" class="active">Tout Parcourir</a></li>
+                <li><a href="toutparcourir_client.php" class="active">Tout Parcourir</a></li>
                 <li><a href="search.html">Recherche</a></li>
                 <li><a href="appointments.html">Rendez-vous</a></li>
                 <!-- Remplacer "connexion.php" par "votre_compte.php" -->
