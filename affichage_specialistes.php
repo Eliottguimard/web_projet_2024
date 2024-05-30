@@ -47,6 +47,9 @@ $type = $_SESSION['type'];
     <link rel="stylesheet" href="styleaccueil.css">
     <style>
         /* Styles pour la mise en page */
+        .calendrier{
+            margin-left: 30px;
+        }
         .medecin {
             margin-bottom: 20px;
             padding: 10px;
@@ -127,7 +130,7 @@ $type = $_SESSION['type'];
         <div class="medecin">
             <h2><?php echo htmlspecialchars($medecin['nom']); ?></h2>
             <p>Spécialité: <?php echo htmlspecialchars($medecin['specialite']); ?></p>
-            <p>Adresse: <?php echo htmlspecialchars($medecin['adresse']); ?></p>
+            <p>Adresse: <?php echo htmlspecialchars($medecin['adresse']); ?> <a class="calendrier" href="calendrier.php?medecin= <?php echo $medecin['id'] ?>">Voir Calendrier</a></p>
             <p>Téléphone: <?php echo htmlspecialchars($medecin['telephone']); ?></p>
             <!-- Ajoutez d'autres informations à afficher selon vos besoins -->
         </div>

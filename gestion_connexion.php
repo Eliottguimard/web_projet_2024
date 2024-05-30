@@ -28,6 +28,8 @@ if($db_found){
             $_SESSION['prenom'] = $row['prenom'];
             $_SESSION['nom'] = $row['nom'];
             $_SESSION['type'] = $row['type'];
+            $_SESSION['id'] = $row['id'];
+
 
             // Redirection vers la page index_client.php
             header("Location: index_client.php");
