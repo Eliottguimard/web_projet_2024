@@ -6,13 +6,47 @@ if(isset($_SESSION['prenom']) && isset($_SESSION['nom']) && isset($_SESSION['typ
     $prenom = $_SESSION['prenom'];
     $nom = $_SESSION['nom'];
     $type = $_SESSION['type'];
-}
-else {
+} else {
     // Redirection vers la page de connexion si les informations du client ne sont pas disponibles
     header("Location: connexion.php");
     exit(); // Assure que le script s'arrête après la redirection
 }
 
+$database = "medicare";
+$db_handle = mysqli_connect('localhost', 'root', '');
+$db_found = mysqli_select_db($db_handle, $database);
+
+$results_medecins = [];
+
+if($db_found){
+    if(isset($_GET['query'])){
+        $query = htmlspecialchars($_GET['query']);
+
+        if(stripos($query, 'labo') !== false){
+            header("Location: affichage_labo.php");
+            exit();
+        }
+
+        // Si la recherche contient "Généraliste" ou "généraliste", afficher tous les médecins généralistes
+        if(stripos($query, 'généraliste') !== false){
+            $sql_medecins = "SELECT * FROM medecin WHERE specialite LIKE '%Généraliste%' OR specialite LIKE '%généraliste%'";
+        } else {
+            $sql_medecins = "SELECT * FROM medecin WHERE nom LIKE '%$query%' OR specialite LIKE '%$query%'";
+        }
+
+        $result_medecins = mysqli_query($db_handle, $sql_medecins);
+
+        if(mysqli_num_rows($result_medecins) > 0){
+            while($row = mysqli_fetch_assoc($result_medecins)){
+                $results_medecins[] = $row;
+            }
+        }
+    }
+} else {
+    echo "Database not found";
+}
+
+mysqli_close($db_handle);
 ?>
 
 <!DOCTYPE html>
@@ -121,6 +155,26 @@ else {
         .client-info-section ul li a:hover {
             color: #003366;
         }
+
+        .search-input {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-button {
+            padding: 5px 10px;
+            margin-left: 5px;
+            background-color: #003366;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-button:hover {
+            background-color: #002244;
+        }
     </style>
 </head>
 <body>
@@ -131,7 +185,12 @@ else {
             <ul>
                 <li><a href="index_client.php" class="active">Accueil</a></li>
                 <li><a href="toutparcourir_client.php">Tout Parcourir</a></li>
-                <li><a href="search.html">Recherche</a></li>
+                <li>
+                    <form action="rechercher.php" method="get" class="search-bar">
+                        <input type="text" name="query" placeholder="Rechercher..." class="search-input">
+                        <button type="submit" class="search-button">Rechercher</button>
+                    </form>
+                </li>
                 <li><a href="appointments.html">Rendez-vous</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Votre Compte</a>
@@ -180,6 +239,23 @@ else {
                 <li><a href="index.html">Se déconnecter</a></li>
             </ul>
         </section>
+    </div>
+    <div class="content-container">
+        <h1>Résultats de recherche pour "<?php echo isset($query) ? $query : ''; ?>"</h1>
+        <div class="results-section">
+            <h2>Médecins</h2>
+            <?php if (count($results_medecins) > 0): ?>
+                <?php foreach ($results_medecins as $medecin): ?>
+                    <div class="result-item">
+                        <h3><?php echo "Dr. ".$medecin['nom']; ?></h3>
+                        <p><strong>Spécialité:</strong> <?php echo $medecin['specialite']; ?></p>
+                        <p><strong>Adresse:</strong> <?php echo $medecin['adresse']; ?></p>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Aucun médecin trouvé.</p>
+            <?php endif; ?>
+        </div>
     </div>
 </main>
 <footer>
