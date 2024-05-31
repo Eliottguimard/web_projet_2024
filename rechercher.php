@@ -10,16 +10,13 @@ if (isset($_SESSION['prenom']) && isset($_SESSION['nom']) && isset($_SESSION['ty
     exit();
 }
 
-
 $database = "medicare";
 $db_handle = mysqli_connect('localhost', 'root', '');
 $db_found = mysqli_select_db($db_handle, $database);
 
-
 $results_medecins = [];
 
 if($db_found){
-
     if(isset($_GET['query'])){
         $query = htmlspecialchars($_GET['query']);
 
@@ -28,12 +25,16 @@ if($db_found){
             exit();
         }
 
-        $sql_medecins = "SELECT * FROM medecin WHERE nom LIKE '%$query%' OR specialite LIKE '%$query%'";
+        // Si la recherche contient "Généraliste" ou "généraliste", afficher tous les médecins généralistes
+        if(stripos($query, 'généraliste') !== false){
+            $sql_medecins = "SELECT * FROM medecin WHERE specialite LIKE '%Généraliste%' OR specialite LIKE '%généraliste%'";
+        } else {
+            $sql_medecins = "SELECT * FROM medecin WHERE nom LIKE '%$query%' OR specialite LIKE '%$query%'";
+        }
+
         $result_medecins = mysqli_query($db_handle, $sql_medecins);
 
-
         if(mysqli_num_rows($result_medecins) > 0){
-
             while($row = mysqli_fetch_assoc($result_medecins)){
                 $results_medecins[] = $row;
             }
@@ -66,8 +67,8 @@ mysqli_close($db_handle);
             min-width: 170px;
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
             z-index: 1;
-            border-radius: 8px; /* Arrondir les bords */
-            padding-left: 10px; /* Déplacer le texte vers la droite */
+            border-radius: 8px;
+            padding-left: 10px;
         }
 
         .dropdown:hover .dropdown-content {
