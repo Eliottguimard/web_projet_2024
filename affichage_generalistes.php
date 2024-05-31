@@ -46,14 +46,11 @@ $type = $_SESSION['type'];
     <title>Liste des médecins généralistes</title>
     <link rel="stylesheet" href="styleaccueil.css">
     <style>
-        /* Styles pour la mise en page */
-        .medecin {
-            margin-bottom: 20px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        /* Style pour le menu déroulant */
+        .dropdown {
+            position: relative;
+            display: inline-block;
         }
-
         .dropdown-content {
             color: #003366;
             display: none;
@@ -70,17 +67,50 @@ $type = $_SESSION['type'];
             display: block;
         }
 
-        .dropdown {
-            position: relative;
-            display: inline-block;
+        /* Styles pour la mise en page */
+        .medecin {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            background-color: #f9f9f9;
         }
 
-        footer {
-            background-color: #87bfdc;
-            padding: 20px;
-            text-align: center;
-            border-top: 1px solid #e7e7e7;
-            margin-top: 20px; /* Ajout d'une marge pour espacer le footer des autres contenus */
+        .photo {
+            margin-right: 20px;
+        }
+
+        .photo img {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 5px;
+        }
+
+        .details {
+            flex-grow: 1;
+        }
+
+        .details h2 {
+            margin-top: 0;
+        }
+
+        .btn-calendrier {
+            margin-left: auto;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-calendrier:hover {
+            background-color: #0056b3;
         }
 
         .footer-content a {
@@ -90,6 +120,14 @@ $type = $_SESSION['type'];
 
         .footer-content p {
             margin: 5px 0; /* Espacement entre les paragraphes du footer */
+        }
+
+        footer {
+            background-color: #87bfdc;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #e7e7e7;
+            margin-top: 20px; /* Ajout d'une marge pour espacer le footer des autres contenus */
         }
     </style>
 </head>
@@ -125,17 +163,24 @@ $type = $_SESSION['type'];
 <?php if (!empty($generalistes)) : ?>
     <?php foreach ($generalistes as $medecin) : ?>
         <div class="medecin">
-            <h2><?php echo htmlspecialchars($medecin['nom']); ?></h2>
-            <p>Spécialité: <?php echo htmlspecialchars($medecin['specialite']); ?> </p>
-            <p>Adresse: <?php echo htmlspecialchars($medecin['adresse']); ?> <a class="calendrier" href="calendrier.php?medecin= <?php echo $medecin['id'] ?>">Voir Calendrier</a> </p>
-            <p>Téléphone: <?php echo htmlspecialchars($medecin['telephone']); ?></p>
-            <!-- Ajoutez d'autres informations à afficher selon vos besoins -->
+            <div class="photo">
+                <img src="photo_medecin.jpg" alt="Photo de médecin">
+            </div>
+            <div class="details">
+                <h2><?php echo htmlspecialchars($medecin['nom']); ?></h2>
+                <p>Spécialité: <?php echo htmlspecialchars($medecin['specialite']); ?> </p>
+                <p>Adresse: <?php echo htmlspecialchars($medecin['adresse']); ?></p>
+                <p>Téléphone: <?php echo htmlspecialchars($medecin['telephone']); ?></p>
+            </div>
+            <a class="btn-calendrier" href="calendrier.php?medecin=<?php echo $medecin['id']; ?>">
+                📅 Prendre un rendez-vous
+            </a>
         </div>
     <?php endforeach; ?>
 <?php else : ?>
     <p>Aucun médecin généraliste trouvé.</p>
 <?php endif; ?>
-</body>
+
 <footer>
     <div class="footer-content">
         <p>Contactez-nous: <a href="mailto:info@medicare.com">info@medicare.com</a></p>
@@ -144,5 +189,5 @@ $type = $_SESSION['type'];
         <p><a href="https://www.google.com/maps?q=123+Rue+de+la+Sant%C3%A9,+75013+Paris,+France" target="_blank">Voir sur Google Maps</a></p>
     </div>
 </footer>
+</body>
 </html>
-
