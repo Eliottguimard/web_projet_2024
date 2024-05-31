@@ -80,6 +80,9 @@ if(isset($_SESSION['prenom']) && isset($_SESSION['nom']) && isset($_SESSION['typ
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .section-title {
@@ -91,6 +94,7 @@ if(isset($_SESSION['prenom']) && isset($_SESSION['nom']) && isset($_SESSION['typ
         .reviews-section ul, .doctor-updates-section ul, .client-info-section ul {
             list-style: none;
             padding: 0;
+            flex-grow: 1;
         }
 
         .reviews-section ul li, .doctor-updates-section ul li, .client-info-section ul li {
@@ -172,7 +176,6 @@ if(isset($_SESSION['prenom']) && isset($_SESSION['nom']) && isset($_SESSION['typ
             <ul>
                 <li><a href="appointments.html">Prendre un rendez-vous</a></li>
                 <li><a href="index.html">Se déconnecter</a></li>
-
             </ul>
         </section>
     </div>
