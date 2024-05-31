@@ -101,7 +101,7 @@ $type = $_SESSION['type'];
         <nav class="main-nav">
             <ul>
                 <li><a href="index_client.php" >Accueil</a></li>
-                <li><a href="toutparcourir.php" class="active">Tout Parcourir</a></li>
+                <li><a href="toutparcourir_client.php" class="active">Tout Parcourir</a></li>
                 <li><a href="search.html">Recherche</a></li>
                 <li><a href="appointments.html">Rendez-vous</a></li>
                 <!-- Remplacer "connexion.php" par "votre_compte.php" -->
@@ -126,8 +126,8 @@ $type = $_SESSION['type'];
     <?php foreach ($generalistes as $medecin) : ?>
         <div class="medecin">
             <h2><?php echo htmlspecialchars($medecin['nom']); ?></h2>
-            <p>Spécialité: <?php echo htmlspecialchars($medecin['specialite']); ?></p>
-            <p>Adresse: <?php echo htmlspecialchars($medecin['adresse']); ?></p>
+            <p>Spécialité: <?php echo htmlspecialchars($medecin['specialite']); ?> </p>
+            <p>Adresse: <?php echo htmlspecialchars($medecin['adresse']); ?> <a class="calendrier" href="calendrier.php?medecin= <?php echo $medecin['id'] ?>">Voir Calendrier</a> </p>
             <p>Téléphone: <?php echo htmlspecialchars($medecin['telephone']); ?></p>
             <!-- Ajoutez d'autres informations à afficher selon vos besoins -->
         </div>

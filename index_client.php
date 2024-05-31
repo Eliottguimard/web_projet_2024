@@ -6,11 +6,13 @@ if(isset($_SESSION['prenom']) && isset($_SESSION['nom']) && isset($_SESSION['typ
     $prenom = $_SESSION['prenom'];
     $nom = $_SESSION['nom'];
     $type = $_SESSION['type'];
-} else {
+}
+else {
     // Redirection vers la page de connexion si les informations du client ne sont pas disponibles
     header("Location: connexion.php");
     exit(); // Assure que le script s'arrête après la redirection
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -128,7 +130,7 @@ if(isset($_SESSION['prenom']) && isset($_SESSION['nom']) && isset($_SESSION['typ
         <nav class="main-nav">
             <ul>
                 <li><a href="index_client.php" class="active">Accueil</a></li>
-                <li><a href="toutparcourir.php">Tout Parcourir</a></li>
+                <li><a href="toutparcourir_client.php">Tout Parcourir</a></li>
                 <li><a href="search.html">Recherche</a></li>
                 <li><a href="appointments.html">Rendez-vous</a></li>
                 <li class="dropdown">

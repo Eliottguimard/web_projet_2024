@@ -28,6 +28,8 @@ if($db_found){
             $_SESSION['prenom'] = $row['prenom'];
             $_SESSION['nom'] = $row['nom'];
             $_SESSION['type'] = $row['type'];
+            $_SESSION['id'] = $row['id'];
+
 
             // Redirection vers la page index_client.php
             header("Location: index_client.php");
@@ -39,10 +41,17 @@ if($db_found){
         $result = mysqli_query($db_handle, $sql);
         $row = mysqli_fetch_assoc($result);
         if($row && !$logged_in){
-            // Connexion réussie pour un médecin
-            echo "Connexion réussie en tant que médecin";
-            // Redirection vers une page de profil médecin
-            $logged_in = true; // Marquer que l'utilisateur est connecté
+            // Connexion réussie pour un client
+            $_SESSION['user_type'] = 'Médecin'; // Stocker le type d'utilisateur dans la session
+
+            // Stocker les informations du client dans des variables PHP
+            $_SESSION['prenom'] = $row['prenom'];
+            $_SESSION['nom'] = $row['nom'];
+            $_SESSION['type'] = $row['type'];
+
+            // Redirection vers la page index_client.php
+            header("Location: index_medecin.php");
+            exit(); // Assure que le script s'arrête après la redirection
         }
 
         // Vérification dans la table administrateur
@@ -50,10 +59,17 @@ if($db_found){
         $result = mysqli_query($db_handle, $sql);
         $row = mysqli_fetch_assoc($result);
         if($row && !$logged_in){
-            // Connexion réussie pour un administrateur
-            echo "Connexion réussie en tant qu'administrateur";
-            // Redirection vers une page de profil administrateur
-            $logged_in = true; // Marquer que l'utilisateur est connecté
+            // Connexion réussie pour un client
+            $_SESSION['user_type'] = 'Admin'; // Stocker le type d'utilisateur dans la session
+
+            // Stocker les informations du client dans des variables PHP
+            $_SESSION['prenom'] = $row['prenom'];
+            $_SESSION['nom'] = $row['nom'];
+            $_SESSION['type'] = $row['type'];
+
+            // Redirection vers la page index_client.php
+            header("Location: index_admin.php");
+            exit(); // Assure que le script s'arrête après la redirection
         }
 
         // Si aucun utilisateur correspondant n'est trouvé
