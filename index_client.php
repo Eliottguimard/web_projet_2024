@@ -240,23 +240,6 @@ mysqli_close($db_handle);
             </ul>
         </section>
     </div>
-    <div class="content-container">
-        <h1>Résultats de recherche pour "<?php echo isset($query) ? $query : ''; ?>"</h1>
-        <div class="results-section">
-            <h2>Médecins</h2>
-            <?php if (count($results_medecins) > 0): ?>
-                <?php foreach ($results_medecins as $medecin): ?>
-                    <div class="result-item">
-                        <h3><?php echo "Dr. ".$medecin['nom']; ?></h3>
-                        <p><strong>Spécialité:</strong> <?php echo $medecin['specialite']; ?></p>
-                        <p><strong>Adresse:</strong> <?php echo $medecin['adresse']; ?></p>
-                    </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p>Aucun médecin trouvé.</p>
-            <?php endif; ?>
-        </div>
-    </div>
 </main>
 <footer>
     <div class="footer-content">
