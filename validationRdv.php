@@ -63,27 +63,36 @@ if(isset($_POST['PrendreRDV']))
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="accueil.js" defer></script>
     <style>
-        /* Style pour le menu déroulant */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
         .dropdown-content {
-            color: #003366;
             display: none;
             position: absolute;
             background-color: #f9f9f9;
-            min-width: 170px;
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
             z-index: 1;
-            border-radius: 8px; /* Arrondir les bords */
-            padding-left: 10px; /* Déplacer le texte vers la droite */
+            border-radius: 8px;
+            padding: 10px;
         }
-
 
         .dropdown:hover .dropdown-content {
             display: block;
+        }
+
+        .content-container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .welcome-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
         }
     </style>
 </head>

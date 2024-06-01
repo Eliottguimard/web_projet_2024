@@ -28,7 +28,7 @@ if ($db_found) {
 }
 
 // Vérifier si les informations du client sont stockées dans la session
-if(!isset($_SESSION['prenom']) || !isset($_SESSION['nom']) || !isset($_SESSION['type'])){
+if (!isset($_SESSION['prenom']) || !isset($_SESSION['nom']) || !isset($_SESSION['type'])) {
     // Redirection vers la page de connexion si les informations du client ne sont pas disponibles
     header("Location: connexion.php");
     exit(); // Assure que le script s'arrête après la redirection
@@ -41,6 +41,7 @@ $type = $_SESSION['type'];
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>Liste des médecins généralistes</title>
@@ -51,6 +52,7 @@ $type = $_SESSION['type'];
             position: relative;
             display: inline-block;
         }
+
         .dropdown-content {
             color: #003366;
             display: none;
@@ -59,8 +61,8 @@ $type = $_SESSION['type'];
             min-width: 170px;
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
             z-index: 1;
-            border-radius: 8px; /* Arrondir les bords */
-            padding-left: 10px; /* Déplacer le texte vers la droite */
+            border-radius: 8px;
+            padding-left: 10px;
         }
 
         .dropdown:hover .dropdown-content {
@@ -97,8 +99,8 @@ $type = $_SESSION['type'];
             margin-top: 0;
         }
 
-        .btn-calendrier {
-            margin-left: auto;
+        .btn-calendrier, .btn-chat, .btn-cv {
+            margin-left: 10px;
             background-color: #007bff;
             color: white;
             padding: 10px 20px;
@@ -109,7 +111,7 @@ $type = $_SESSION['type'];
             gap: 8px;
         }
 
-        .btn-calendrier:hover {
+        .btn-calendrier:hover, .btn-chat:hover, .btn-cv:hover {
             background-color: #0056b3;
         }
 
@@ -119,7 +121,7 @@ $type = $_SESSION['type'];
         }
 
         .footer-content p {
-            margin: 5px 0; /* Espacement entre les paragraphes du footer */
+            margin: 5px 0;
         }
 
         footer {
@@ -127,10 +129,47 @@ $type = $_SESSION['type'];
             padding: 20px;
             text-align: center;
             border-top: 1px solid #e7e7e7;
-            margin-top: 20px; /* Ajout d'une marge pour espacer le footer des autres contenus */
+            margin-top: 20px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover, .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </head>
+
 <body>
 
 <header>
@@ -138,19 +177,16 @@ $type = $_SESSION['type'];
         <img src="logo.png" alt="Medicare Logo" class="logo">
         <nav class="main-nav">
             <ul>
-                <li><a href="index_client.php" >Accueil</a></li>
+                <li><a href="index_client.php">Accueil</a></li>
                 <li><a href="toutparcourir_client.php" class="active">Tout Parcourir</a></li>
                 <li><a href="search.html">Recherche</a></li>
                 <li><a href="appointments.html">Rendez-vous</a></li>
-                <!-- Remplacer "connexion.php" par "votre_compte.php" -->
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Votre Compte</a>
                     <div class="dropdown-content">
-                        <!-- Contenu du menu déroulant avec les informations du patient -->
                         <p>Nom: <span id="patient-nom"><?php echo $nom; ?></span></p>
                         <p>Prénom: <span id="patient-prenom"><?php echo $prenom; ?></span></p>
-                        <p>type connexion: <span id="type-connexion"><?php echo $type; ?></span></p>
-                        <!-- Ajoutez d'autres champs selon les informations du patient que vous souhaitez afficher -->
+                        <p>Type connexion: <span id="type-connexion"><?php echo $type; ?></span></p>
                     </div>
                 </li>
                 <li><a href="index.html">Se déconnecter</a></li>
@@ -168,12 +204,18 @@ $type = $_SESSION['type'];
             </div>
             <div class="details">
                 <h2><?php echo htmlspecialchars($medecin['nom']); ?></h2>
-                <p>Spécialité: <?php echo htmlspecialchars($medecin['specialite']); ?> </p>
+                <p>Spécialité: <?php echo htmlspecialchars($medecin['specialite']); ?></p>
                 <p>Adresse: <?php echo htmlspecialchars($medecin['adresse']); ?></p>
                 <p>Téléphone: <?php echo htmlspecialchars($medecin['telephone']); ?></p>
             </div>
             <a class="btn-calendrier" href="calendrier.php?medecin=<?php echo $medecin['id']; ?>">
                 📅 Prendre un rendez-vous
+            </a>
+            <a class="btn-chat" href="chat.php?medecin=<?php echo $medecin['id']; ?>">
+                💬 Communiquer avec le médecin
+            </a>
+            <a class="btn-cv" href="cv.php?medecin=<?php echo $medecin['id']; ?>">
+                📄 Voir CV
             </a>
         </div>
     <?php endforeach; ?>
@@ -189,5 +231,7 @@ $type = $_SESSION['type'];
         <p><a href="https://www.google.com/maps?q=123+Rue+de+la+Sant%C3%A9,+75013+Paris,+France" target="_blank">Voir sur Google Maps</a></p>
     </div>
 </footer>
+
 </body>
+
 </html>

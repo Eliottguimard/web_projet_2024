@@ -209,6 +209,42 @@ $type = $_SESSION['type'];
             margin-top: 20px; /* Ajout d'une marge pour espacer le footer des autres contenus */
         }
 
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover, .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -254,6 +290,12 @@ $type = $_SESSION['type'];
             </div>
             <a class="btn-calendrier" href="calendrier.php?medecin=<?php echo $medecin['id']; ?>">
                 📅 Prendre un rendez-vous
+            </a>
+            <a class="btn-chat" href="chat.php?medecin=<?php echo $medecin['id']; ?>">
+                💬 Communiquer avec le médecin
+            </a>
+            <a class="btn-cv" href="cv.php?medecin=<?php echo $medecin['id']; ?>">
+                📄 Voir CV
             </a>
         </div>
     <?php endforeach; ?>

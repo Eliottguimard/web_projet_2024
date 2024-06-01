@@ -94,8 +94,12 @@ if($db_found){
         }
         else $existeCalendrier = false;
     }
+    // Fermer la connexion à la base de données
+    mysqli_close($db_handle);
 }
-
+$prenom = $_SESSION['prenom'];
+$nom = $_SESSION['nom'];
+$type = $_SESSION['type'];
 ?>
 
 <!DOCTYPE html>
@@ -107,52 +111,81 @@ if($db_found){
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="accueil.js" defer></script>
     <style>
-        {
-            position: relative;
-            display: inline-block;
-        }
-
         .dropdown-content {
             color: #003366;
             display: none;
             position: absolute;
             background-color: #f9f9f9;
-            min-width: 170px;
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
             z-index: 1;
-            border-radius: 8px; /* Arrondir les bords */
-            padding-left: 10px; /* Déplacer le texte vers la droite */
+            border-radius: 8px;
+            padding: 10px;
         }
-
-
         .dropdown:hover .dropdown-content {
             display: block;
         }
-        .RemplirCaseLibre{
+        .RemplirCaseLibre {
             background-color: white;
-            color: white;
+            color: black;
+            text-align: center;
         }
-        .maResa{
+        .maResa {
             background-color: red;
-            color: red;
+            color: white;
+            text-align: center;
         }
         .RemplirCase {
             background-color: #0066cc;
-            bgcolor: #0066cc;
-            /*color: #fff;
-            border: none;
-             padding: 10px 20px;
-            margi-bottom: 30px;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;*/
+            color: white;
+            text-align: center;
         }
         .NoircirCase {
             background-color: black;
-            bgcolor: black;
+            color: white;
+            text-align: center;
+        }
+        .content-container {
+            padding: 20px;
+        }
+        .welcome-section, .faq-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        h1, h2, h4 {
+            margin-top: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #003366;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        .cta-button {
+            background-color: #0066cc;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 5px;
+            display: inline-block;
+        }
+        .cta-button a {
+            color: white;
+            text-decoration: none;
+        }
+        .cta-button:hover {
+            background-color: #004999;
         }
     </style>
-    <title>Planning</title>
 </head>
 <body>
 <header>
@@ -164,15 +197,12 @@ if($db_found){
                 <li><a href="toutparcourir.php">Tout Parcourir</a></li>
                 <li><a href="search.html">Recherche</a></li>
                 <li><a href="appointments.html">Rendez-vous</a></li>
-                <!-- Remplacer "connexion.php" par "votre_compte.php" -->
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Votre Compte</a>
                     <div class="dropdown-content">
-                        <!-- Contenu du menu déroulant avec les informations du patient -->
                         <p>Nom: <span id="patient-nom"><?php echo $nom; ?></span></p>
                         <p>Prénom: <span id="patient-prenom"><?php echo $prenom; ?></span></p>
-                        <p>type connexion: <span id="type-connexion"><?php echo $type; ?></span></p>
-                        <!-- Ajoutez d'autres champs selon les informations du patient que vous souhaitez afficher -->
+                        <p>Type connexion: <span id="type-connexion"><?php echo $type; ?></span></p>
                     </div>
                 </li>
                 <li><a href="index.html">Se déconnecter</a></li>
@@ -180,171 +210,178 @@ if($db_found){
         </nav>
     </div>
 </header>
-    <p>
-        <h1> Médecin <?php echo $prenomMedecin, " ", $nomMedecin, " " ?></h1>
-        <h4> Contact : <?php echo $telephoneMedecin?> </h4>
-        <h2> Spécialité <?php echo $specialiteMedecin ?></h2>
-    </p>
-    <table border="3" >
-        <tr>
-            <td>   </td>
-            <td>Lundi</td>
-            <td>Mardi</td>
-            <td>Mercredi</td>
-            <td>Jeudi</td>
-            <td>Vendredi</td>
-        </tr>
-        
-        <tr>
-            <td>9h</td>
-            <?php
-            if ($L1 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L1 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi1'</a>Votre Rdv</td>";} else if ($L1 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi1'</a>Prendre RDV</td>"; }
-            if ($M1 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M1 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi1'</a>Votre Rdv</td>";}else if ($M1 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi1'</a>Prendre RDV</td>"; }
-            if ($Me1 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me1 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi1'</a>Votre Rdv</td>";}else if ($Me1 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi1'</a>Prendre RDV</td>"; }
-            if ($J1 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J1 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi1'</a>Votre Rdv</td>";}else if ($J1 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi1'</a>Prendre RDV</td>"; }
-            if ($V1 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V1 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi1'</a>Votre Rdv</td>";}else if ($V1 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi1'</a>Prendre RDV</td>"; }
-            ?>
-        </tr>
+<main>
+    <div class="content-container">
+        <div class="welcome-section">
+            <h1>Planning Médecin <?php echo "$prenomMedecin $nomMedecin" ?></h1>
+            <h4>Contact : <?php echo $telephoneMedecin ?></h4>
+            <h2>Spécialité : <?php echo $specialiteMedecin ?></h2>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th></th>
+                <th>Lundi</th>
+                <th>Mardi</th>
+                <th>Mercredi</th>
+                <th>Jeudi</th>
+                <th>Vendredi</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>9h</td>
+                <?php
+                if ($L1 == -1) { echo "<td class='RemplirCase'>Indisponible</td>"; } else if ($L1 == $_SESSION['id']) { echo "<td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi1'>Votre Rdv</a></td>"; } else if ($L1 >= 1) { echo "<td class='RemplirCase'>Pris</td>"; } else { echo "<td class='RemplirCaseLibre'><a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi1'>Prendre RDV</a></td>"; }
+                if ($M1 == -1) { echo "<td class='RemplirCase'>Indisponible</td>"; } else if ($M1 == $_SESSION['id']) { echo "<td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi1'>Votre Rdv</a></td>"; } else if ($M1 >= 1) { echo "<td class='RemplirCase'>Pris</td>"; } else { echo "<td class='RemplirCaseLibre'><a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi1'>Prendre RDV</a></td>"; }
+                if ($Me1 == -1) { echo "<td class='RemplirCase'>Indisponible</td>"; } else if ($Me1 == $_SESSION['id']) { echo "<td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi1'>Votre Rdv</a></td>"; } else if ($Me1 >= 1) { echo "<td class='RemplirCase'>Pris</td>"; } else { echo "<td class='RemplirCaseLibre'><a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi1'>Prendre RDV</a></td>"; }
+                if ($J1 == -1) { echo "<td class='RemplirCase'>Indisponible</td>"; } else if ($J1 == $_SESSION['id']) { echo "<td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi1'>Votre Rdv</a></td>"; } else if ($J1 >= 1) { echo "<td class='RemplirCase'>Pris</td>"; } else { echo "<td class='RemplirCaseLibre'><a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi1'>Prendre RDV</a></td>"; }
+                if ($V1 == -1) { echo "<td class='RemplirCase'>Indisponible</td>"; } else if ($V1 == $_SESSION['id']) { echo "<td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi1'>Votre Rdv</a></td>"; } else if ($V1 >= 1) { echo "<td class='RemplirCase'>Pris</td>"; } else { echo "<td class='RemplirCaseLibre'><a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi1'>Prendre RDV</a></td>"; }
+                ?>
+            </tr>
+            <tr>
+                <td>9h 20</td>
+                <?php
+                if ($L2 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L2 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi2'</a>Votre Rdv</td>";} else if ($L2 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi2'</a> Prendre RDV</td>"; }
+                if ($M2 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M2 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi2'</a>Votre Rdv</td>";} else if ($M2 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi2'</a>Prendre RDV</td>"; }
+                if ($Me2 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me2 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi2'</a>Votre Rdv</td>";} else if ($Me2 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi2'</a>Prendre RDV</td>"; }
+                if ($J2 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J2 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi2'</a>Votre Rdv</td>";} else if ($J2 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi2'</a>Prendre RDV</td>"; }
+                if ($V2 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V2 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi2'</a>Votre Rdv</td>";} else if ($V2 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi2'</a>Prendre RDV</td>"; }
+                ?>
+            </tr>
 
-        <tr>
-            <td>9h 20</td>
-            <?php
-            if ($L2 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L2 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi2'</a>Votre Rdv</td>";} else if ($L2 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi2'</a> Prendre RDV</td>"; }
-            if ($M2 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M2 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi2'</a>Votre Rdv</td>";} else if ($M2 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi2'</a>Prendre RDV</td>"; }
-            if ($Me2 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me2 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi2'</a>Votre Rdv</td>";} else if ($Me2 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi2'</a>Prendre RDV</td>"; }
-            if ($J2 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J2 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi2'</a>Votre Rdv</td>";} else if ($J2 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi2'</a>Prendre RDV</td>"; }
-            if ($V2 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V2 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi2'</a>Votre Rdv</td>";} else if ($V2 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi2'</a>Prendre RDV</td>"; }
-            ?>
-        </tr>
+            <tr>
+                <td>9h 40</td>
+                <?php
+                if ($L3 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L3 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi3'</a>Votre Rdv</td>";} else if ($L3 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi3'</a> Prendre RDV</td>"; }
+                if ($M3 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M3 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi3'</a>Votre Rdv</td>";} else if ($M3 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi3'</a>Prendre RDV</td>"; }
+                if ($Me3 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me3 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi3'</a>Votre Rdv</td>";} else if ($Me3 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi3'</a>Prendre RDV</td>"; }
+                if ($J3 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J3 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi3'</a>Votre Rdv</td>";} else if ($J1 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi3'</a>Prendre RDV</td>"; }
+                if ($V3 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V3 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi3'</a>Votre Rdv</td>";} else if ($V3 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi3'</a>Prendre RDV</td>"; }
+                ?>
+            </tr>
 
-        <tr>
-            <td>9h 40</td>
-            <?php
-            if ($L3 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L3 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi3'</a>Votre Rdv</td>";} else if ($L3 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi3'</a> Prendre RDV</td>"; }
-            if ($M3 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M3 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi3'</a>Votre Rdv</td>";} else if ($M3 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi3'</a>Prendre RDV</td>"; }
-            if ($Me3 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me3 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi3'</a>Votre Rdv</td>";} else if ($Me3 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi3'</a>Prendre RDV</td>"; }
-            if ($J3 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J3 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi3'</a>Votre Rdv</td>";} else if ($J1 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi3'</a>Prendre RDV</td>"; }
-            if ($V3 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V3 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi3'</a>Votre Rdv</td>";} else if ($V3 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi3'</a>Prendre RDV</td>"; }
-            ?>
-        </tr>
-        
-        <tr>
-            <td>10h </td>
-            <?php
-            if ($L4 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L4 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi4'</a>Votre Rdv</td>";} else if ($L4 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi4'</a> Prendre RDV</td>"; }
-            if ($M4 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M4 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi4'</a>Votre Rdv</td>";} else if ($M4 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi4'</a>Prendre RDV</td>"; }
-            if ($Me4 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me4 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi4'</a>Votre Rdv</td>";} else if ($Me4 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi4'</a>Prendre RDV</td>"; }
-            if ($J4 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J4 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi4'</a>Votre Rdv</td>";} else if ($J4 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi4'</a>Prendre RDV</td>"; }
-            if ($V4 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V4 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=vendredi4'</a>Votre Rdv</td>";} else if ($V4 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi4'</a>Prendre RDV</td>"; }
-            ?>
-        </tr>
-        
-        <tr>
-            <td>10h 20</td>
-            <?php
-            if ($L5 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L5 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi5'</a>Votre Rdv</td>";} else if ($L5 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi5'</a> Prendre RDV</td>"; }
-            if ($M5 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M5 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi5'</a>Votre Rdv</td>";} else if ($M5 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi5'</a>Prendre RDV</td>"; }
-            if ($Me5 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me5 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi5'</a>Votre Rdv</td>";} else if ($Me5 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi5'</a>Prendre RDV</td>"; }
-            if ($J5 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J5 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi5'</a>Votre Rdv</td>";} else if ($J5 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi5'</a>Prendre RDV</td>"; }
-            if ($V5 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V5 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi5'</a>Votre Rdv</td>";} else if ($V5 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi5'</a>Prendre RDV</td>"; }
-            ?>
-        </tr>
+            <tr>
+                <td>10h </td>
+                <?php
+                if ($L4 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L4 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi4'</a>Votre Rdv</td>";} else if ($L4 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi4'</a> Prendre RDV</td>"; }
+                if ($M4 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M4 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi4'</a>Votre Rdv</td>";} else if ($M4 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi4'</a>Prendre RDV</td>"; }
+                if ($Me4 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me4 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi4'</a>Votre Rdv</td>";} else if ($Me4 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi4'</a>Prendre RDV</td>"; }
+                if ($J4 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J4 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi4'</a>Votre Rdv</td>";} else if ($J4 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi4'</a>Prendre RDV</td>"; }
+                if ($V4 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V4 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=vendredi4'</a>Votre Rdv</td>";} else if ($V4 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi4'</a>Prendre RDV</td>"; }
+                ?>
+            </tr>
 
-        <tr>
-            <td>10h 40</td>
-            <?php
-            if ($L6 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L6 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi6'</a>Votre Rdv</td>";} else if ($L6 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi6'</a> Prendre RDV</td>"; }
-            if ($M6 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M6 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi6'</a>Votre Rdv</td>";} else if ($M6 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi6'</a>Prendre RDV</td>"; }
-            if ($Me6 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me6 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi6'</a>Votre Rdv</td>";} else if ($Me6 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi6'</a>Prendre RDV</td>"; }
-            if ($J6 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J6 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi6'</a>Votre Rdv</td>";} else if ($J6 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi6'</a>Prendre RDV</td>"; }
-            if ($V6 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V6 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi6'</a>Votre Rdv</td>";} else if ($V6 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi6'</a>Prendre RDV</td>"; }
-            ?>
-        </tr>
+            <tr>
+                <td>10h 20</td>
+                <?php
+                if ($L5 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L5 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi5'</a>Votre Rdv</td>";} else if ($L5 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi5'</a> Prendre RDV</td>"; }
+                if ($M5 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M5 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi5'</a>Votre Rdv</td>";} else if ($M5 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi5'</a>Prendre RDV</td>"; }
+                if ($Me5 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me5 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi5'</a>Votre Rdv</td>";} else if ($Me5 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi5'</a>Prendre RDV</td>"; }
+                if ($J5 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J5 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi5'</a>Votre Rdv</td>";} else if ($J5 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi5'</a>Prendre RDV</td>"; }
+                if ($V5 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V5 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi5'</a>Votre Rdv</td>";} else if ($V5 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi5'</a>Prendre RDV</td>"; }
+                ?>
+            </tr>
 
-        <tr>
-            <td>11h</td>
-            <?php
-            if ($L7 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L7 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi7'</a>Votre Rdv</td>";} else if ($L7 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi7'</a> Prendre RDV</td>"; }
-            if ($M7 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M7 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi7'</a>Votre Rdv</td>";} else if ($M7 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi7'</a>Prendre RDV</td>"; }
-            if ($Me7 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me7 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi7'</a>Votre Rdv</td>";} else if ($Me7 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi7'</a>Prendre RDV</td>"; }
-            if ($J7 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J7 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi7'</a>Votre Rdv</td>";} else if ($J7 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi7'</a>Prendre RDV</td>"; }
-            if ($V7 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V7 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi7'</a>Votre Rdv</td>";} else if ($V7 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi7'</a>Prendre RDV</td>"; }
-            ?>
-        </tr>
+            <tr>
+                <td>10h 40</td>
+                <?php
+                if ($L6 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L6 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi6'</a>Votre Rdv</td>";} else if ($L6 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi6'</a> Prendre RDV</td>"; }
+                if ($M6 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M6 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi6'</a>Votre Rdv</td>";} else if ($M6 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi6'</a>Prendre RDV</td>"; }
+                if ($Me6 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me6 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi6'</a>Votre Rdv</td>";} else if ($Me6 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi6'</a>Prendre RDV</td>"; }
+                if ($J6 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J6 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi6'</a>Votre Rdv</td>";} else if ($J6 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi6'</a>Prendre RDV</td>"; }
+                if ($V6 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V6 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi6'</a>Votre Rdv</td>";} else if ($V6 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi6'</a>Prendre RDV</td>"; }
+                ?>
+            </tr>
 
-        <tr>
-            <td>11h 20</td>
-            <?php
-            if ($L8 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L8 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi8'</a>Votre Rdv</td>";} else if ($L8 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi8'</a> Prendre RDV</td>"; }
-            if ($M8 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M8 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi8'</a>Votre Rdv</td>";} else if ($M8 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi8'</a>Prendre RDV</td>"; }
-            if ($Me8 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me8 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi8'</a>Votre Rdv</td>";} else if ($Me8 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi8'</a>Prendre RDV</td>"; }
-            if ($J8 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J8 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi8'</a>Votre Rdv</td>";} else if ($J8 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi8'</a>Prendre RDV</td>"; }
-            if ($V8 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V8 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi8'</a>Votre Rdv</td>";} else if ($V8 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi8'</a>Prendre RDV</td>"; }
-            ?>
-        </tr>
+            <tr>
+                <td>11h</td>
+                <?php
+                if ($L7 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L7 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi7'</a>Votre Rdv</td>";} else if ($L7 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi7'</a> Prendre RDV</td>"; }
+                if ($M7 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M7 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi7'</a>Votre Rdv</td>";} else if ($M7 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi7'</a>Prendre RDV</td>"; }
+                if ($Me7 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me7 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi7'</a>Votre Rdv</td>";} else if ($Me7 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi7'</a>Prendre RDV</td>"; }
+                if ($J7 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J7 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi7'</a>Votre Rdv</td>";} else if ($J7 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi7'</a>Prendre RDV</td>"; }
+                if ($V7 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V7 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi7'</a>Votre Rdv</td>";} else if ($V7 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi7'</a>Prendre RDV</td>"; }
+                ?>
+            </tr>
 
-        <tr>
-            <td>11h 40</td>
-            <?php
-            if ($L9 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L9 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi9'</a>Votre Rdv</td>";} else if ($L9 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi9'</a> Prendre RDV</td>"; }
-            if ($M9 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M9 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi9'</a>Votre Rdv</td>";} else if ($M9 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi9'</a>Prendre RDV</td>"; }
-            if ($Me9 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me9 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi9'</a>Votre Rdv</td>";} else if ($Me9 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi9'</a>Prendre RDV</td>"; }
-            if ($J9 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J9 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi9'</a>Votre Rdv</td>";} else if ($J9 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi9'</a>Prendre RDV</td>"; }
-            if ($V9 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V9 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi9'</a>Votre Rdv</td>";} else if ($V9 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi9'</a>Prendre RDV</td>"; }
-            ?>
-        </tr>
-        <tr>
-            <td>12h - 14h</td>
-            <td class='NoircirCase'> <?php echo "."?> </td>
-            <td class='NoircirCase'> <?php echo " ."?> </td>
-            <td class='NoircirCase'> <?php echo " ."?> </td>
-            <td class='NoircirCase'> <?php echo " ."?> </td>
-            <td class='NoircirCase'> <?php echo " ."?> </td>
-        </tr>
-        <tr>
-            <td> </td>
-            <td class='NoircirCase'> <?php echo "."?> </td>
-            <td class='NoircirCase'> <?php echo " ."?> </td>
-            <td class='NoircirCase'> <?php echo " ."?> </td>
-            <td class='NoircirCase'> <?php echo " ."?> </td>
-            <td class='NoircirCase'> <?php echo " ."?> </td>
-        </tr>
+            <tr>
+                <td>11h 20</td>
+                <?php
+                if ($L8 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L8 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi8'</a>Votre Rdv</td>";} else if ($L8 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi8'</a> Prendre RDV</td>"; }
+                if ($M8 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M8 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi8'</a>Votre Rdv</td>";} else if ($M8 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi8'</a>Prendre RDV</td>"; }
+                if ($Me8 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me8 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi8'</a>Votre Rdv</td>";} else if ($Me8 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi8'</a>Prendre RDV</td>"; }
+                if ($J8 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J8 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi8'</a>Votre Rdv</td>";} else if ($J8 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi8'</a>Prendre RDV</td>"; }
+                if ($V8 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V8 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi8'</a>Votre Rdv</td>";} else if ($V8 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi8'</a>Prendre RDV</td>"; }
+                ?>
+            </tr>
 
-        <tr>
-            <td>14h</td>
-            <?php
-            if ($L10 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L10 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi10'</a>Votre Rdv</td>";} else if ($L10 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi10'</a> Prendre RDV</td>"; }
-            if ($M10 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M10 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi10'</a>Votre Rdv</td>";} else if ($M10 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi10'</a>Prendre RDV</td>"; }
-            if ($Me10 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me10 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi10'</a>Votre Rdv</td>";} else if ($Me10 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi10'</a>Prendre RDV</td>"; }
-            if ($J10 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J10 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi10'</a>Votre Rdv</td>";} else if ($J10 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi10'</a>Prendre RDV</td>"; }
-            if ($V10 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V10 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi10'</a>Votre Rdv</td>";} else if ($V10 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi10'</a>Prendre RDV</td>"; }
-            ?>
-        </tr>
+            <tr>
+                <td>11h 40</td>
+                <?php
+                if ($L9 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L9 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi9'</a>Votre Rdv</td>";} else if ($L9 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi9'</a> Prendre RDV</td>"; }
+                if ($M9 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M9 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi9'</a>Votre Rdv</td>";} else if ($M9 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi9'</a>Prendre RDV</td>"; }
+                if ($Me9 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me9 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi9'</a>Votre Rdv</td>";} else if ($Me9 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi9'</a>Prendre RDV</td>"; }
+                if ($J9 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J9 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi9'</a>Votre Rdv</td>";} else if ($J9 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi9'</a>Prendre RDV</td>"; }
+                if ($V9 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V9 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi9'</a>Votre Rdv</td>";} else if ($V9 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi9'</a>Prendre RDV</td>"; }
+                ?>
+            </tr>
+            <tr>
+                <td></td>
+            <td class='NoircirCase'> <?php echo "Pause déjeuner"?> </td>
+                <td class='NoircirCase'> <?php echo "Pause déjeuner"?> </td>
+                <td class='NoircirCase'> <?php echo "Pause déjeuner"?> </td>
+                <td class='NoircirCase'> <?php echo "Pause déjeuner"?> </td>
+                <td class='NoircirCase'> <?php echo "Pause déjeuner"?> </td>
+            </tr>
+            <tr>
+                <td> </td>
+                <td class='NoircirCase'> <?php echo "Pause déjeuner"?> </td>
+                <td class='NoircirCase'> <?php echo "Pause déjeuner"?> </td>
+                <td class='NoircirCase'> <?php echo "Pause déjeuner"?> </td>
+                <td class='NoircirCase'> <?php echo "Pause déjeuner"?> </td>
+                <td class='NoircirCase'> <?php echo "Pause déjeuner"?> </td>
+            </tr>
 
-        <tr>
-            <td>14h 20</td>
-            <?php
-            if ($L11 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L11 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi11'</a>Votre Rdv</td>";} else if ($L11 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi11'</a> Prendre RDV</td>"; }
-            if ($M11 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M11 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi11'</a>Votre Rdv</td>";} else if ($M11 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi11'</a>Prendre RDV</td>"; }
-            if ($Me11 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me11 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi11'</a>Votre Rdv</td>";} else if ($Me11 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi11'</a>Prendre RDV</td>"; }
-            if ($J11 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J11 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi11'</a>Votre Rdv</td>";} else if ($J11 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi11'</a>Prendre RDV</td>"; }
-            if ($V11 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V11 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi11'</a>Votre Rdv</td>";} else if ($V11 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi11'</a>Prendre RDV</td>"; }
-            ?>
-        </tr>
+            <tr>
+                <td>14h</td>
+                <?php
+                if ($L10 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L10 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi10'</a>Votre Rdv</td>";} else if ($L10 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi10'</a> Prendre RDV</td>"; }
+                if ($M10 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M10 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi10'</a>Votre Rdv</td>";} else if ($M10 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi10'</a>Prendre RDV</td>"; }
+                if ($Me10 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me10 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi10'</a>Votre Rdv</td>";} else if ($Me10 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi10'</a>Prendre RDV</td>"; }
+                if ($J10 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J10 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi10'</a>Votre Rdv</td>";} else if ($J10 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi10'</a>Prendre RDV</td>"; }
+                if ($V10 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V10 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi10'</a>Votre Rdv</td>";} else if ($V10 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi10'</a>Prendre RDV</td>"; }
+                ?>
+            </tr>
 
-        <tr>
-            <td>14h 40</td>
-            <?php
-            if ($L12 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L12 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi12'</a>Votre Rdv</td>";} else if ($L12 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi12'</a> Prendre RDV</td>"; }
-            if ($M12 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M12 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi12'</a>Votre Rdv</td>";} else if ($M12 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi12'</a>Prendre RDV</td>"; }
-            if ($Me12 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me12 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi12'</a>Votre Rdv</td>";} else if ($Me12 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi12'</a>Prendre RDV</td>"; }
-            if ($J12 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J12 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi12'</a>Votre Rdv</td>";} else if ($J12 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi12'</a>Prendre RDV</td>"; }
-            if ($V12 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V12 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi12'</a>Votre Rdv</td>";} else if ($V12 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi12'</a>Prendre RDV</td>"; }
-            ?>
-        </tr>
-    </table>
+            <tr>
+                <td>14h 20</td>
+                <?php
+                if ($L11 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L11 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi11'</a>Votre Rdv</td>";} else if ($L11 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi11'</a> Prendre RDV</td>"; }
+                if ($M11 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M11 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi11'</a>Votre Rdv</td>";} else if ($M11 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi11'</a>Prendre RDV</td>"; }
+                if ($Me11 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me11 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi11'</a>Votre Rdv</td>";} else if ($Me11 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi11'</a>Prendre RDV</td>"; }
+                if ($J11 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J11 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi11'</a>Votre Rdv</td>";} else if ($J11 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi11'</a>Prendre RDV</td>"; }
+                if ($V11 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V11 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi11'</a>Votre Rdv</td>";} else if ($V11 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi11'</a>Prendre RDV</td>"; }
+                ?>
+            </tr>
 
-</body>
+            <tr>
+                <td>14h 40</td>
+                <?php
+                if ($L12 == -1) { echo " <td class='RemplirCase'> Indisponible</td>"; } else if ($L12 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Lundi12'</a>Votre Rdv</td>";} else if ($L12 >=1) { echo "<td class='RemplirCase'>    Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Lundi12'</a> Prendre RDV</td>"; }
+                if ($M12 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($M12 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mardi12'</a>Votre Rdv</td>";} else if ($M12 >=1) { echo " <td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mardi12'</a>Prendre RDV</td>"; }
+                if ($Me12 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($Me12 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Mercredi12'</a>Votre Rdv</td>";} else if ($Me12 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Mercredi12'</a>Prendre RDV</td>"; }
+                if ($J12 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($J12 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Jeudi12'</a>Votre Rdv</td>";} else if ($J12 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Jeudi12'</a>Prendre RDV</td>"; }
+                if ($V12 == -1) { echo " <td class='RemplirCase'>Indisponible</td>"; } else if ($V12 ==$_SESSION['id']){ echo " <td class='maResa'><a href='annulationRdv.php?medecin=$IDMedecin&creneau=Vendredi12'</a>Votre Rdv</td>";} else if ($V12 >=1) { echo "<td class='RemplirCase'>   Pris   </td>"; } else { echo "<td class='RemplirCaseLibre'> <a href='validationRdv.php?medecin=$IDMedecin&creneau=Vendredi12'</a>Prendre RDV</td>"; }
+                ?>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="button-container">
+        <button class="cta-button"><a href="affichage_generalistes.php" class="button-link">Retour à la liste des médecins généralistes</a></button>
+    </div>
+</main>
 <footer>
     <div class="footer-content">
         <p>Contactez-nous: <a href="mailto:info@medicare.com">info@medicare.com</a></p>
