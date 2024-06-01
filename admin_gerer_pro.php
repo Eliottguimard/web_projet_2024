@@ -1,7 +1,6 @@
 <?php
-session_start(); // Démarrer la session
+session_start();
 
-// Identifier le nom de la base de données
 $database = "medicare";
 
 // Connectez-vous à votre base de données
@@ -9,22 +8,22 @@ $db_handle = mysqli_connect('localhost', 'root', '');
 $db_found = mysqli_select_db($db_handle, $database);
 $validation = '';
 
-if (isset($_SESSION['prenom']) && isset($_SESSION['nom']) && isset($_SESSION['type'])) {
+if(isset($_SESSION['prenom']) && isset($_SESSION['nom']) && isset($_SESSION['type'])){
     $prenom = $_SESSION['prenom'];
     $nom = $_SESSION['nom'];
     $type = $_SESSION['type'];
 }
 
-if (!$db_found) {
+if(!$db_found){
     die("Database not found");
 }
 
-if (isset($_POST['delete_id'])) {
+if(isset($_POST['delete_id'])){
     $delete_id = $_POST['delete_id'];
     $delete_sql = "DELETE FROM medecin WHERE id = $delete_id";
 }
 
-if (isset($_POST['add_medecin'])) {
+if(isset($_POST['add_medecin'])){
     $nom_medecin = $_POST['nom_medecin'];
     $prenom_medecin = $_POST['prenom_medecin'];
     $email_medecin = $_POST['email_medecin'];
@@ -33,15 +32,16 @@ if (isset($_POST['add_medecin'])) {
     $adresse_medecin = $_POST['adresse_medecin'];
     $login_medecin = $email_medecin;
     $mdp_medecin = $_POST['mdp_medecin'];
+    $type = 'medecin';
 
-    if (!empty($nom_medecin) && !empty($prenom_medecin) && !empty($email_medecin) && !empty($tel_medecin) && !empty($specialite_medecin) && !empty($adresse_medecin) && !empty($login_medecin) && !empty($mdp_medecin)) {
-        $insert_sql = "INSERT INTO medecin (nom, prenom, email, telephone, specialite, adresse, login, mdp) 
-                       VALUES ('$nom_medecin', '$prenom_medecin', '$email_medecin', '$tel_medecin', '$specialite_medecin', '$adresse_medecin', '$login_medecin', '$mdp_medecin')";
-        if (mysqli_query($db_handle, $insert_sql)) {
+    if(!empty($nom_medecin) && !empty($prenom_medecin) && !empty($email_medecin) && !empty($tel_medecin) && !empty($specialite_medecin) && !empty($adresse_medecin) && !empty($login_medecin) && !empty($mdp_medecin)){
+        $insert_sql = "INSERT INTO medecin (nom, prenom, email, telephone, specialite, adresse, login, mdp, type) 
+                       VALUES ('$nom_medecin', '$prenom_medecin', '$email_medecin', '$tel_medecin', '$specialite_medecin', '$adresse_medecin', '$login_medecin', '$mdp_medecin', '$type')";
+        if(mysqli_query($db_handle, $insert_sql)){
             $validation = 'Médecin ajouté avec succès.';
         }
 
-        else {
+        else{
             $validation = 'Erreur lors de l\'ajout du médecin : ' . mysqli_error($db_handle);
         }
     }
@@ -145,7 +145,6 @@ $result = mysqli_query($db_handle, $sql);
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Votre Compte</a>
                     <div class="dropdown-content">
-                        <!-- Contenu du menu déroulant avec les informations de l'administrateur -->
                         <p>Nom: <span id="admin-nom"><?php echo $nom; ?></span></p>
                         <p>Prénom: <span id="admin-prenom"><?php echo $prenom; ?></span></p>
                         <p>Type connexion: <span id="type-connexion"><?php echo $type; ?></span></p>
@@ -157,7 +156,6 @@ $result = mysqli_query($db_handle, $sql);
     </div>
 </header>
 
-<!-- Formulaire pour ajouter un nouveau médecin -->
 <h1>Ajouter un médecin</h1>
 
 <form method="post" action="" class="add-form">
@@ -172,7 +170,7 @@ $result = mysqli_query($db_handle, $sql);
 </form>
 
 <?php
-if ($validation != '') {
+if($validation != ''){
     echo "<p>$validation</p>";
 }
 ?>
@@ -193,8 +191,8 @@ if ($validation != '') {
     </thead>
     <tbody>
     <?php
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
+    if(mysqli_num_rows($result) > 0){
+        while($row = mysqli_fetch_assoc($result)){
             echo "<tr>";
             echo "<td>" . $row['id'] . "</td>";
             echo "<td>" . $row['nom'] . "</td>";
@@ -212,7 +210,9 @@ if ($validation != '') {
                   </td>';
             echo "</tr>";
         }
-    } else {
+    }
+
+    else{
         echo "<tr><td colspan='9'>Aucun médecin trouvé.</td></tr>";
     }
     ?>
