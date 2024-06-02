@@ -18,34 +18,6 @@ $db_found = mysqli_select_db($db_handle, $database);
 
 $results_medecins = [];
 
-if($db_found){
-    if(isset($_GET['query'])){
-        $query = htmlspecialchars($_GET['query']);
-
-        if(stripos($query, 'labo') !== false){
-            header("Location: affichage_labo.php");
-            exit();
-        }
-
-        // Si la recherche contient "Généraliste" ou "généraliste", afficher tous les médecins généralistes
-        if(stripos($query, 'généraliste') !== false){
-            $sql_medecins = "SELECT * FROM medecin WHERE specialite LIKE '%Généraliste%' OR specialite LIKE '%généraliste%'";
-        } else {
-            $sql_medecins = "SELECT * FROM medecin WHERE nom LIKE '%$query%' OR specialite LIKE '%$query%'";
-        }
-
-        $result_medecins = mysqli_query($db_handle, $sql_medecins);
-
-        if(mysqli_num_rows($result_medecins) > 0){
-            while($row = mysqli_fetch_assoc($result_medecins)){
-                $results_medecins[] = $row;
-            }
-        }
-    }
-} else {
-    echo "Database not found";
-}
-
 mysqli_close($db_handle);
 ?>
 

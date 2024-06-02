@@ -103,19 +103,6 @@ else {
             border-radius: 10px;
         }
 
-        .cta-button {
-            background-color: #cc0000;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .cta-button:hover {
-            background-color: #990000;
-        }
-
         h1, h2, h3, h4, h5, h6 {
             color: #cc0000; /* Tous les titres en rouge */
         }
