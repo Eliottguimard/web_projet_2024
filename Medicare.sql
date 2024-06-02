@@ -30,7 +30,7 @@ CREATE TABLE medecin (
                          cv TEXT,
                          login VARCHAR(100),
                          mdp VARCHAR(100),
-                         type VARCHAR(50) -- Ajout du champ type
+                         type VARCHAR(50)
 );
 
 CREATE TABLE administrateur (

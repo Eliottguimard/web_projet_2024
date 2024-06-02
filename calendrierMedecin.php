@@ -141,7 +141,6 @@ if($db_found){
         <nav class="main-nav">
             <ul>
                 <li><a href="index_medecin.php" class="active">Accueil</a></li>
-                <li><a href="search.html">Recherche</a></li>
                 <!-- Remplacer "connexion.php" par "votre_compte.php" -->
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Votre Compte</a>

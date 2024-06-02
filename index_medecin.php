@@ -80,7 +80,6 @@ else {
         <nav class="main-nav">
             <ul>
                 <li><a href="index_medecin.php" class="active">Accueil</a></li>
-               <li><a href="recherche.php">Recherche</a></li>
                 <li><a href="calendrierMedecin.php">Rendez-vous</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Votre Compte</a>

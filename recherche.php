@@ -126,12 +126,12 @@ mysqli_close($db_handle);
                 <li><a href="index_client.php">Accueil</a></li>
                 <li><a href="toutparcourir_client.php">Tout Parcourir</a></li>
                 <li>
-                    <form action="rechercher.php" method="get" class="search-bar">
+                    <form action="recherche.php" method="get" class="search-bar">
                         <input type="text" name="query" placeholder="Rechercher..." class="search-input">
                         <button type="submit" class="search-button">Rechercher</button>
                     </form>
                 </li>
-                <li><a href="appointments.html">Rendez-vous</a></li>
+                <li><a href="RDVClient.php">Rendez-vous</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Votre Compte</a>
                     <div class="dropdown-content">

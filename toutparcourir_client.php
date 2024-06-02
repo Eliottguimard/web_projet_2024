@@ -7,10 +7,18 @@ if(!isset($_SESSION['prenom']) || !isset($_SESSION['nom']) || !isset($_SESSION['
     header("Location: connexion.php");
     exit(); // Assure que le script s'arrête après la redirection
 }
+// Vérifier si les informations du client sont stockées dans la session
+if (isset($_SESSION['prenom']) && isset($_SESSION['nom']) && isset($_SESSION['login'])){
+    $prenom = $_SESSION['prenom'];
+    $nom = $_SESSION['nom'];
+    $mail = $_SESSION['login'];
+}
 
 $prenom = $_SESSION['prenom'];
 $nom = $_SESSION['nom'];
 $type = $_SESSION['type'];
+
+
 ?>
 
 <!DOCTYPE html>
@@ -88,6 +96,25 @@ $type = $_SESSION['type'];
         .footer-content p {
             margin: 5px 0; /* Espacement entre les paragraphes du footer */
         }
+        .search-input {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-button {
+            padding: 5px 10px;
+            margin-left: 5px;
+            background-color: #003366;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-button:hover {
+            background-color: #002244;
+        }
     </style>
 </head>
 <body>
@@ -98,8 +125,13 @@ $type = $_SESSION['type'];
             <ul>
                 <li><a href="index_client.php" >Accueil</a></li>
                 <li><a href="toutparcourir_client.php" class="active">Tout Parcourir</a></li>
-                <li><a href="recherche.php">Recherche</a></li>
-                <li><a href="appointments.html">Rendez-vous</a></li>
+                <li>
+                    <form action="recherche.php" method="get" class="search-bar">
+                        <input type="text" name="query" placeholder="Rechercher..." class="search-input">
+                        <button type="submit" class="search-button">Rechercher</button>
+                    </form>
+                </li>
+                <li><a href="RDVClient.php">Rendez-vous</a></li>
                 <!-- Remplacer "connexion.php" par "votre_compte.php" -->
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Votre Compte</a>
@@ -107,7 +139,7 @@ $type = $_SESSION['type'];
                         <!-- Contenu du menu déroulant avec les informations du patient -->
                         <p>Nom: <span id="patient-nom"><?php echo $nom; ?></span></p>
                         <p>Prénom: <span id="patient-prenom"><?php echo $prenom; ?></span></p>
-                        <p>type connexion: <span id="type-connexion"><?php echo $type; ?></span></p>
+                        <p>Courriel: <span id="type-connexion"><?php echo $mail; ?></span></p>
                         <!-- Ajoutez d'autres champs selon les informations du patient que vous souhaitez afficher -->
                     </div>
                 </li>

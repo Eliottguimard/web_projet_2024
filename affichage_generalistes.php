@@ -180,7 +180,7 @@ $type = $_SESSION['type'];
                 <li><a href="index_client.php">Accueil</a></li>
                 <li><a href="toutparcourir_client.php" class="active">Tout Parcourir</a></li>
                 <li><a href="recherche.php">Recherche</a></li>
-                <li><a href="appointments.html">Rendez-vous</a></li>
+                <li><a href="RDVClient.php">Rendez-vous</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Votre Compte</a>
                     <div class="dropdown-content">

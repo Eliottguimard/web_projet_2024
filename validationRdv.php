@@ -49,10 +49,6 @@ if(isset($_POST['PrendreRDV']))
 {
     $sql = "UPDATE calendrier SET $creneau = $id WHERE calendrier.id = $IDMedecin";
     $result = mysqli_query($db_handle, $sql);
-
-    /*$rdv = "INSERT INTO listeRDV (client, medecin, creneau) VALUES ($_SESSION[id], $IDMedecin, '$creneau')";
-    $result = mysqli_query($db_handle, $rdv);*/
-
     header("Location: calendrier.php?medecin=$IDMedecin ");
     exit();
 }
@@ -67,27 +63,36 @@ if(isset($_POST['PrendreRDV']))
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="accueil.js" defer></script>
     <style>
-        /* Style pour le menu déroulant */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
         .dropdown-content {
-            color: #003366;
             display: none;
             position: absolute;
             background-color: #f9f9f9;
-            min-width: 170px;
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
             z-index: 1;
-            border-radius: 8px; /* Arrondir les bords */
-            padding-left: 10px; /* Déplacer le texte vers la droite */
+            border-radius: 8px;
+            padding: 10px;
         }
-
 
         .dropdown:hover .dropdown-content {
             display: block;
+        }
+
+        .content-container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .welcome-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -98,19 +103,16 @@ if(isset($_POST['PrendreRDV']))
         <nav class="main-nav">
             <ul>
                 <li><a href="index_client.php" class="active">Accueil</a></li>
-                <li><a href="toutparcourir.php">Tout Parcourir</a></li>
-                <li><a href="search.html">Recherche</a></li>
-                <li><a href="appointments.html">Rendez-vous</a></li>
-                <!-- Remplacer "connexion.php" par "votre_compte.php" -->
+                <li><a href="toutparcourir_client.php">Tout Parcourir</a></li>
+                <li><a href="recherche.php">Recherche</a></li>
+                <li><a href="RDVClient.php">Rendez-vous</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Votre Compte</a>
                     <div class="dropdown-content">
                         <!-- Contenu du menu déroulant avec les informations du patient -->
-                        <p>Nom: <span id="patient-nom"><?php echo $_SESSION['nom']; ?></span></p>
-                        <p>Prénom: <span id="patient-prenom"><?php echo $_SESSION['prenom']; ?></span></p>
-                        <p>Adresse: <span id="patient-prenom"><?php echo $_SESSION['adresseComplete']; ?></span></p>
-                        <p>email: <span id="patient-prenom"><?php echo $_SESSION['email']; ?></span></p>
-                        <!--<p>Type connexion: <span id="type-connexion"><?php echo $type; ?></span></p>-->
+                        <p>Nom: <span id="patient-nom"><?php echo $nom; ?></span></p>
+                        <p>Prénom: <span id="patient-prenom"><?php echo $prenom; ?></span></p>
+                        <p>type connexion: <span id="type-connexion"><?php echo $type; ?></span></p>
                         <!-- Ajoutez d'autres champs selon les informations du patient que vous souhaitez afficher -->
                     </div>
                 </li>

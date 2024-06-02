@@ -30,7 +30,7 @@ if($db_found){
             $_SESSION['type'] = $row['type'];
             $_SESSION['id'] = $row['id'];
             $_SESSION['adresseComplete'] = $row['adresse_ligne1'] . ' ' . $row['adresse_ligne2'] . ' ' . $row['ville'] . ' ' . $row['code_postal'];
-            $_SESSION['email'] = $row['email'];
+            $_SESSION['login'] = $row['login'];
 
 
             // Redirection vers la page index_client.php

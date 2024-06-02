@@ -252,7 +252,7 @@ if ($db_found) {
                         <p>Prénom: <span id="patient-prenom"><?php echo $_SESSION['prenom']; ?></span></p>
                         <p>Adresse: <span id="patient-prenom"><?php echo $_SESSION['adresseComplete']; ?></span></p>
                         <p>email: <span id="patient-prenom"><?php echo $_SESSION['email']; ?></span></p>
-                        <!--<p>Type connexion: <span id="type-connexion"><?php echo $type; ?></span></p>-->
+                        <!--<p>Type connexion: <span id="type-connexion"><?php echo $mail; ?></span></p>-->
                         <!-- Ajoutez d'autres champs selon les informations du patient que vous souhaitez afficher -->
                     </div>
                 </li>

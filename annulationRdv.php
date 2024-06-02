@@ -99,8 +99,8 @@ if(isset($_POST['AnnulerRDV']))
             <ul>
                 <li><a href="index_client.php" class="active">Accueil</a></li>
                 <li><a href="toutparcourir.php">Tout Parcourir</a></li>
-                <li><a href="search.html">Recherche</a></li>
-                <li><a href="appointments.html">Rendez-vous</a></li>
+                <li><a href="recherche.php">Recherche</a></li>
+                <li><a href="RDVClient.php">Rendez-vous</a></li>
                 <!-- Remplacer "connexion.php" par "votre_compte.php" -->
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Votre Compte</a>
