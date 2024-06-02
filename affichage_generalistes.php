@@ -83,11 +83,12 @@ $type = $_SESSION['type'];
 
         .photo {
             margin-right: 20px;
+
         }
 
         .photo img {
-            max-width: 100px;
-            max-height: 100px;
+            max-width: 150px;
+            max-height: 150px;
             border-radius: 5px;
         }
 
@@ -197,27 +198,27 @@ $type = $_SESSION['type'];
 
 <h1>Liste des médecins généralistes</h1>
 <?php if (!empty($generalistes)) : ?>
-    <?php foreach ($generalistes as $medecin) : ?>
-        <div class="medecin">
-            <div class="photo">
-                <img src="photo_medecin.jpg" alt="Photo de médecin">
-            </div>
-            <div class="details">
-                <h2><?php echo htmlspecialchars($medecin['nom']); ?></h2>
-                <p>Spécialité: <?php echo htmlspecialchars($medecin['specialite']); ?></p>
-                <p>Adresse: <?php echo htmlspecialchars($medecin['adresse']); ?></p>
-                <p>Téléphone: <?php echo htmlspecialchars($medecin['telephone']); ?></p>
-            </div>
-            <a class="btn-calendrier" href="calendrier.php?medecin=<?php echo $medecin['id']; ?>">
-                📅 Prendre un rendez-vous
-            </a>
-            <a class="btn-chat" href="chat.php?medecin=<?php echo $medecin['id']; ?>">
-                💬 Communiquer avec le médecin
-            </a>
-            <a class="btn-cv" href="cv.php?medecin=<?php echo $medecin['id']; ?>">
-                📄 Voir CV
-            </a>
-        </div>
+<?php foreach ($generalistes as $medecin) : ?>
+<div class="medecin">
+    <div class="photo">
+        <img src="<?php echo htmlspecialchars($medecin['photo']); ?>" alt="Photo de <?php echo htmlspecialchars($medecin['nom']); ?>">
+    </div>
+    <div class="details">
+        <h2><?php echo htmlspecialchars($medecin['nom']); ?></h2>
+        <p>Spécialité: <?php echo htmlspecialchars($medecin['specialite']); ?></p>
+        <p>Adresse: <?php echo htmlspecialchars($medecin['adresse']); ?></p>
+        <p>Téléphone: <?php echo htmlspecialchars($medecin['telephone']); ?></p>
+    </div>
+    <a class="btn-calendrier" href="calendrier.php?medecin=<?php echo $medecin['id']; ?>">
+        📅 Prendre un rendez-vous
+    </a>
+    <a class="btn-chat" href="chat.php?medecin=<?php echo $medecin['id']; ?>">
+        💬 Communiquer avec le médecin
+    </a>
+    <a class="btn-cv" href="cv.php?medecin=<?php echo $medecin['id']; ?>">
+        📄 Voir CV
+    </a>
+</div>
     <?php endforeach; ?>
 <?php else : ?>
     <p>Aucun médecin généraliste trouvé.</p>

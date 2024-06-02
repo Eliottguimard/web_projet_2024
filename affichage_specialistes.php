@@ -86,8 +86,8 @@ $type = $_SESSION['type'];
         }
 
         .photo img {
-            max-width: 100px;
-            max-height: 100px;
+            max-width: 150px;
+            max-height: 150px;
             border-radius: 5px;
         }
 
@@ -200,7 +200,7 @@ $type = $_SESSION['type'];
     <?php foreach ($specialistes as $medecin) : ?>
         <div class="medecin">
             <div class="photo">
-                <img src="photo_medecin.jpg" alt="Photo de médecin">
+                <img src="<?php echo htmlspecialchars($medecin['photo']); ?>" alt="Photo de <?php echo htmlspecialchars($medecin['nom']); ?>">
             </div>
             <div class="details">
                 <h2><?php echo htmlspecialchars($medecin['nom']); ?></h2>

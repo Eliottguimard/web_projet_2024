@@ -168,14 +168,14 @@ if (!$medecin) {
 
     echo "<h3>Formations:</h3>";
     echo "<ul>";
-    for ($i = 7; $i <= 9; $i++) {
+    for ($i = 5; $i <= 7; $i++) {
         echo "<li>" . $cv_lines[$i] . "</li>";
     }
     echo "</ul>";
 
     echo "<h3>Expériences:</h3>";
     echo "<ul>";
-    for ($i = 12; $i <= 14; $i++) {
+    for ($i = 8; $i <= 9; $i++) {
         echo "<li>" . $cv_lines[$i] . "</li>";
     }
     echo "</ul>";
