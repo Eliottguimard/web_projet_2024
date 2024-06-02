@@ -33,6 +33,11 @@ header {
     background: linear-gradient(to right, #0056b3, #0088cc);
     padding: 10px 20px;
 }
+
+.header-tableau {
+    background-color: #0088cc;
+    color: #fff;
+}
 .logo-header {
     height: 75px; /* Taille du logo dans l'en-tête */
 }

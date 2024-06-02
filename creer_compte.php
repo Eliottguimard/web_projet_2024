@@ -68,12 +68,11 @@
 <header>
     <div class="header-content">
         <img src="logo.png" alt="Medicare Logo" class="logo">
+        <h1 class="medicare-title">MEDICARE</h1> <!-- Ajout du titre MEDICARE -->
         <nav class="main-nav">
             <ul>
                 <li><a href="index.html">Accueil</a></li>
-                <li><a href="browse.html">Tout Parcourir</a></li>
                 <li><a href="search.html">Recherche</a></li>
-                <li><a href="appointments.html">Rendez-vous</a></li>
                 <li><a href="connexion.php"  class="active">Se connecter</a></li>
             </ul>
         </nav>

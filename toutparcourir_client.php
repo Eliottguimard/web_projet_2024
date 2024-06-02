@@ -52,13 +52,14 @@ $type = $_SESSION['type'];
         }
 
         .medecin-box {
-            flex: 1 1 350px; /* Permet aux boîtes de s'étendre et se rétrécir selon l'espace disponible */
-            padding: 50px;
+            flex: 1 1 30%; /* Assure que chaque boîte prenne une largeur de 30% */
+            padding: 20px;
             max-width: 370px; /* Limite la largeur de la boîte */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
             background: #f9f9f9;
-            margin: 20px; /* Ajout d'une marge pour espacer les boîtes */
+            margin: 10px; /* Ajout d'une marge pour espacer les boîtes */
+            box-sizing: border-box; /* Inclut la padding et les marges dans la largeur */
         }
 
         .link {
@@ -97,7 +98,7 @@ $type = $_SESSION['type'];
             <ul>
                 <li><a href="index_client.php" >Accueil</a></li>
                 <li><a href="toutparcourir_client.php" class="active">Tout Parcourir</a></li>
-                <li><a href="search.html">Recherche</a></li>
+                <li><a href="recherche.php">Recherche</a></li>
                 <li><a href="appointments.html">Rendez-vous</a></li>
                 <!-- Remplacer "connexion.php" par "votre_compte.php" -->
                 <li class="dropdown">

@@ -3,9 +3,11 @@ session_start(); // Démarrer la session
 
 // Vérifier si les informations du client sont stockées dans la session
 if(isset($_SESSION['prenom']) && isset($_SESSION['nom']) && isset($_SESSION['type'])){
-    $prenom = $_SESSION['prenom'];
-    $nom = $_SESSION['nom'];
-    $type = $_SESSION['type'];
+    $prenomClient = $_SESSION['prenom'];
+    $nomClient = $_SESSION['nom'];
+    $adresseClient = $_SESSION['adresseComplete'];
+    $mailClient = $_SESSION['email'];
+    //$type = $_SESSION['type'];
 }
 else {
     // Redirection vers la page de connexion si les informations du client ne sont pas disponibles
@@ -127,18 +129,21 @@ else {
 <header>
     <div class="header-content">
         <img src="logo.png" alt="Medicare Logo" class="logo">
+        <h1 class="medicare-title">MEDICARE </h1>
         <nav class="main-nav">
             <ul>
                 <li><a href="index_client.php" class="active">Accueil</a></li>
                 <li><a href="toutparcourir_client.php">Tout Parcourir</a></li>
-                <li><a href="search.html">Recherche</a></li>
-                <li><a href="appointments.html">Rendez-vous</a></li>
+                <li><a href="recherche.php">Recherche</a></li>
+                <li><a href="RDVClient.php">Rendez-vous</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Votre Compte</a>
                     <div class="dropdown-content">
-                        <p>Nom: <span id="patient-nom"><?php echo $nom; ?></span></p>
-                        <p>Prénom: <span id="patient-prenom"><?php echo $prenom; ?></span></p>
-                        <p>Type connexion: <span id="type-connexion"><?php echo $type; ?></span></p>
+                        <p>Nom: <span id="patient-nom"><?php echo $_SESSION['nom']; ?></span></p>
+                        <p>Prénom: <span id="patient-prenom"><?php echo $_SESSION['prenom']; ?></span></p>
+                        <p>Adresse: <span id="patient-prenom"><?php echo $_SESSION['adresseComplete']; ?></span></p>
+                        <p>email: <span id="patient-prenom"><?php echo $_SESSION['email']; ?></span></p>
+                        <!--<p>Type connexion: <span id="type-connexion"><?php echo $type; ?></span></p>-->
                     </div>
                 </li>
                 <li><a href="index.html">Se déconnecter</a></li>
@@ -148,7 +153,7 @@ else {
 </header>
 <main>
     <section class="welcome-section">
-        <h1>Bienvenue, <?php echo $prenom; ?>!</h1>
+        <h1>Bienvenue, <?php echo $_SESSION['prenom']; ?>!</h1>
         <p>Nous sommes heureux de vous revoir.</p>
     </section>
     <div class="content-container">
@@ -176,7 +181,7 @@ else {
         <section class="client-info-section">
             <h2 class="section-title">Liens rapides</h2>
             <ul>
-                <li><a href="appointments.html">Prendre un rendez-vous</a></li>
+                <li><a href="toutparcourir_client.php">Prendre un rendez-vous</a></li>
                 <li><a href="index.html">Se déconnecter</a></li>
             </ul>
         </section>

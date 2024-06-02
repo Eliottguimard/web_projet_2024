@@ -97,6 +97,7 @@ else {
         }
 
         .faq-section {
+            margin: auto;
             background-color: #ffe6e6;
             padding: 20px;
             border-radius: 10px;
@@ -143,9 +144,7 @@ else {
         <nav class="main-nav">
             <ul>
                 <li><a href="index_admin.php" class="active">Accueil</a></li>
-                <li><a href="gerer_utilisateurs.php">Gérer Utilisateurs</a></li>
-                <li><a href="gerer_appointments.php">Gérer Rendez-vous</a></li>
-                <li><a href="statistiques.php">Statistiques</a></li>
+                <li><a href="admin_gerer_pro.php">Gérer les professionels de santé</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Votre Compte</a>
                     <div class="dropdown-content">
@@ -165,17 +164,12 @@ else {
         <div class="welcome-section">
             <h1>Bienvenue à Medicare Admin <?php echo $prenom; ?></h1>
             <p>Gérez les services et les utilisateurs avec facilité.</p>
-            <button class="cta-button">Commencer maintenant</button>
         </div>
         <div class="faq-section">
             <h2>FAQ Admin</h2>
             <details>
                 <summary>Comment ajouter un utilisateur?</summary>
-                <p>Accédez à la section "Gérer Utilisateurs" pour ajouter, modifier ou supprimer des utilisateurs.</p>
-            </details>
-            <details>
-                <summary>Comment gérer les rendez-vous?</summary>
-                <p>Visitez la section "Gérer Rendez-vous" pour voir, approuver ou annuler les rendez-vous.</p>
+                <p>Accédez à la section "Gérer les professionels de santé" pour ajouter ou supprimer des médecins.</p>
             </details>
         </div>
     </div>

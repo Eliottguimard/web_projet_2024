@@ -2,10 +2,14 @@
 session_start(); // Démarrer la session
 
 // Vérifier si les informations du client sont stockées dans la session
-if(isset($_SESSION['prenom']) && isset($_SESSION['nom']) && isset($_SESSION['type'])){
-    $prenom = $_SESSION['prenom'];
-    $nom = $_SESSION['nom'];
-    $type = $_SESSION['type'];
+if(isset($_SESSION['prenom']) && isset($_SESSION['nom']) && isset($_SESSION['type']) && isset($_SESSION['email']) && isset($_SESSION['telephone']) && isset($_SESSION['specialite'])){
+    $prenomMedecin = $_SESSION['prenom'];
+    $nomMedecin = $_SESSION['nom'];
+    $typeMedecin = $_SESSION['type'];
+    $IDMedecin = $_SESSION['id'];
+    $mailMedecin = $_SESSION['email'];
+    $telephoneMedecin = $_SESSION['telephone'];
+    $specialiteMedecin = $_SESSION['specialite'];
 }
 else {
     // Redirection vers la page de connexion si les informations du client ne sont pas disponibles
@@ -72,19 +76,19 @@ else {
 <header>
     <div class="header-content">
         <img src="logo.png" alt="Medicare Logo" class="logo">
+        <h1 class="medicare-title">MEDICARE MEDECIN</h1>
         <nav class="main-nav">
             <ul>
                 <li><a href="index_medecin.php" class="active">Accueil</a></li>
-                <li><a href="toutparcourir_medecin.php">Tout Parcourir</a></li><!--il faudrait un parcourir medecin ou autre onglet-->
-                <li><a href="search.html">Recherche</a></li>
-                <li><a href="appointments.html">Rendez-vous</a></li>
+               <li><a href="recherche.php">Recherche</a></li>
+                <li><a href="calendrierMedecin.php">Rendez-vous</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Votre Compte</a>
                     <div class="dropdown-content">
                         <!-- Contenu du menu déroulant avec les informations du patient -->
-                        <p>Nom: <span id="patient-nom"><?php echo $nom; ?></span></p>
-                        <p>Prénom: <span id="patient-prenom"><?php echo $prenom; ?></span></p>
-                        <p>Type connexion: <span id="type-connexion"><?php echo $type; ?></span></p>
+                        <p>Nom: <span id="patient-nom"><?php echo $nomMedecin; ?></span></p>
+                        <p>Prénom: <span id="patient-prenom"><?php echo $prenomMedecin; ?></span></p>
+                        <p>Courriel: <span id="type-connexion"><?php echo $mailMedecin; ?></span></p>
                         <!-- Ajoutez d'autres champs selon les informations du patient que vous souhaitez afficher -->
                     </div>
                 </li>
@@ -97,15 +101,12 @@ else {
     <div class="content-container">
         <div class="welcome-faq-container">
             <div class="welcome-section">
-                <h1>Bienvenue à Medicare Docteur <?php echo $nom; ?></h1>
-                <p>Votre santé, notre priorité.</p>
-                <p>Découvrez nos services et spécialistes.</p>
-                <button class="cta-button">Explorez maintenant</button>
+                <h1>Bienvenue à Medicare Docteur <?php echo $nomMedecin; ?></h1>
             </div>
             <div class="faq-section">
                 <h2>Votre planning</h2>
                 <div class="planning-section">
-                    <h4><a href="">Cliquer pour voir votre planning</a></h4>
+                    <h4><a href="calendrierMedecin.php">Cliquer pour voir votre planning</a></h4>
                     <!-- Exemple de consultations -->
                     <div class="planning-item">
                         <span class="planning-date">01/06/2024 14:00</span>

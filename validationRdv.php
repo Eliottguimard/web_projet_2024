@@ -49,6 +49,10 @@ if(isset($_POST['PrendreRDV']))
 {
     $sql = "UPDATE calendrier SET $creneau = $id WHERE calendrier.id = $IDMedecin";
     $result = mysqli_query($db_handle, $sql);
+
+    /*$rdv = "INSERT INTO listeRDV (client, medecin, creneau) VALUES ($_SESSION[id], $IDMedecin, '$creneau')";
+    $result = mysqli_query($db_handle, $rdv);*/
+
     header("Location: calendrier.php?medecin=$IDMedecin ");
     exit();
 }
@@ -102,9 +106,11 @@ if(isset($_POST['PrendreRDV']))
                     <a href="#" class="dropbtn">Votre Compte</a>
                     <div class="dropdown-content">
                         <!-- Contenu du menu déroulant avec les informations du patient -->
-                        <p>Nom: <span id="patient-nom"><?php echo $nom; ?></span></p>
-                        <p>Prénom: <span id="patient-prenom"><?php echo $prenom; ?></span></p>
-                        <p>type connexion: <span id="type-connexion"><?php echo $type; ?></span></p>
+                        <p>Nom: <span id="patient-nom"><?php echo $_SESSION['nom']; ?></span></p>
+                        <p>Prénom: <span id="patient-prenom"><?php echo $_SESSION['prenom']; ?></span></p>
+                        <p>Adresse: <span id="patient-prenom"><?php echo $_SESSION['adresseComplete']; ?></span></p>
+                        <p>email: <span id="patient-prenom"><?php echo $_SESSION['email']; ?></span></p>
+                        <!--<p>Type connexion: <span id="type-connexion"><?php echo $type; ?></span></p>-->
                         <!-- Ajoutez d'autres champs selon les informations du patient que vous souhaitez afficher -->
                     </div>
                 </li>

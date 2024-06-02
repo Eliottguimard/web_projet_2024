@@ -29,6 +29,8 @@ if($db_found){
             $_SESSION['nom'] = $row['nom'];
             $_SESSION['type'] = $row['type'];
             $_SESSION['id'] = $row['id'];
+            $_SESSION['adresseComplete'] = $row['adresse_ligne1'] . ' ' . $row['adresse_ligne2'] . ' ' . $row['ville'] . ' ' . $row['code_postal'];
+            $_SESSION['email'] = $row['email'];
 
 
             // Redirection vers la page index_client.php
@@ -48,6 +50,11 @@ if($db_found){
             $_SESSION['prenom'] = $row['prenom'];
             $_SESSION['nom'] = $row['nom'];
             $_SESSION['type'] = $row['type'];
+            $_SESSION['id'] = $row['id'];
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['telephone'] = $row['telephone'];
+            $_SESSION['specialite'] = $row['specialite'];
+
 
             // Redirection vers la page index_client.php
             header("Location: index_medecin.php");
@@ -66,6 +73,8 @@ if($db_found){
             $_SESSION['prenom'] = $row['prenom'];
             $_SESSION['nom'] = $row['nom'];
             $_SESSION['type'] = $row['type'];
+            $_SESSION['id'] = $row['id'];
+            $_SESSION['email'] = $row['email'];
 
             // Redirection vers la page index_client.php
             header("Location: index_admin.php");

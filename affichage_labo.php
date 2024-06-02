@@ -90,20 +90,23 @@ $type = $_SESSION['type'];
 <header>
     <div class="header-content">
         <img src="logo.png" alt="Medicare Logo" class="logo">
+        <h1 class="medicare-title">MEDICARE </h1>
         <nav class="main-nav">
             <ul>
                 <li><a href="index_client.php" >Accueil</a></li>
                 <li><a href="toutparcourir_client.php" class="active">Tout Parcourir</a></li>
-                <li><a href="search.html">Recherche</a></li>
-                <li><a href="appointments.html">Rendez-vous</a></li>
+                <li><a href="recherche.php">Recherche</a></li>
+                <li><a href="RDVClient.php">Rendez-vous</a></li>
                 <!-- Remplacer "connexion.php" par "votre_compte.php" -->
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Votre Compte</a>
                     <div class="dropdown-content">
                         <!-- Contenu du menu déroulant avec les informations du patient -->
-                        <p>Nom: <span id="patient-nom"><?php echo $nom; ?></span></p>
-                        <p>Prénom: <span id="patient-prenom"><?php echo $prenom; ?></span></p>
-                        <p>type connexion: <span id="type-connexion"><?php echo $type; ?></span></p>
+                        <p>Nom: <span id="patient-nom"><?php echo $_SESSION['nom']; ?></span></p>
+                        <p>Prénom: <span id="patient-prenom"><?php echo $_SESSION['prenom']; ?></span></p>
+                        <p>Adresse: <span id="patient-prenom"><?php echo $_SESSION['adresseComplete']; ?></span></p>
+                        <p>email: <span id="patient-prenom"><?php echo $_SESSION['email']; ?></span></p>
+                        <!--<p>Type connexion: <span id="type-connexion"><?php echo $type; ?></span></p>-->
                         <!-- Ajoutez d'autres champs selon les informations du patient que vous souhaitez afficher -->
                     </div>
                 </li>
