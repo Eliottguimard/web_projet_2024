@@ -12,15 +12,14 @@ $prenom = $_SESSION['prenom'];
 $nom = $_SESSION['nom'];
 $type = $_SESSION['type'];
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
+<meta charset="UTF-8">
+<title>Medicare: Accueil</title>
+<link rel="stylesheet" href="styleaccueil.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="accueil.js" defer></script>
 <head>
-    <meta charset="UTF-8">
-    <title>Medicare: Accueil</title>
-    <link rel="stylesheet" href="styleaccueil.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="accueil.js" defer></script>
     <style>
         /* Style pour le menu déroulant */
         .dropdown {
@@ -43,40 +42,47 @@ $type = $_SESSION['type'];
             display: block;
         }
 
-        .service-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
+        .content-box {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 10px;
             padding: 20px;
-        }
-        .service-card {
-            background: white;
-            border-radius: 8px;
+            margin: 20px 100px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            width: calc(33% - 40px);
-            margin: 20px;
-            padding: 20px;
-            text-align: center;
         }
-        .service-card h2 {
-            color: #0056b3;
+
+        .advice-box {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 10px;
         }
-        .service-card p {
-            color: #666;
+
+        .intro, .before, .after {
+            text-align: left;
+            color: #333;
             font-size: 16px;
-            margin: 10px 0 20px;
+            line-height: 1.6;
         }
-        .btn {
+
+        .btn.rendezvous {
+            display: block;
+            width: auto;
             background-color: #007bff;
             color: white;
+            text-align: center;
             padding: 10px 20px;
+            margin-top: 20px;
             text-decoration: none;
             border-radius: 5px;
-            display: inline-block;
+            transition: background-color 0.3s;
         }
-        .btn:hover {
-            background-color: #004a9f;
+
+        .btn.rendezvous:hover {
+            background-color: #0056b3;
         }
+
         .footer-content a {
             color: #0066cc;
             text-decoration: none;
@@ -93,10 +99,9 @@ $type = $_SESSION['type'];
             border-top: 1px solid #e7e7e7;
             margin-top: 20px;
         }
-    </style>
+        </style>
 </head>
 <body>
-
 <header>
     <div class="header-content">
         <img src="logo.png" alt="Medicare Logo" class="logo">
@@ -121,32 +126,20 @@ $type = $_SESSION['type'];
 
 </header>
 
-<h1>Services de Laboratoire</h1>
+<main>
+    <h1>Biologie Préventive</h1>
+    <div class="content-box">
+        <p class="intro"><h3>La biologie préventive comprend des tests réguliers pour détecter les conditions avant qu'elles ne deviennent sérieuses.</h3></p>
+        <div class="advice-box">
+            <p class="before">Avant votre examen, il est recommandé de jeûner pendant 8 à 12 heures pour certains tests sanguins pour plus de précision.</p>
+            <p class="after">Après les tests, reprenez une alimentation normale et consultez votre médecin pour discuter des résultats et des éventuelles étapes suivantes.</p>
+        </div>
+        <a href="RDV_labo.php" class="btn rendezvous">Prendre Rendez-vous</a>
+    </div>
+</main>
 
-<div class="service-container">
-    <div class="service-card">
-        <h2>Dépistage COVID-19</h2>
-        <p>Informations sur le prélèvement de sang, d'urine et les précautions à prendre avant, pendant, et après le prélèvement.</p>
-        <a href="covid.php" class="btn">En savoir plus</a>
-    </div>
 
-    <div class="service-card">
-        <h2>Biologie de la Femme Enceinte</h2>
-        <p>Tests spécifiques et conseils pour le suivi biologique durant la grossesse.</p>
-        <a href="pregnancy.php" class="btn">En savoir plus</a>
-    </div>
 
-    <div class="service-card">
-        <h2>Cancérologie</h2>
-        <p>Dépistage et suivi oncologique, avec explications sur les différents types de biomarqueurs et tests disponibles.</p>
-        <a href="cancer.php" class="btn">En savoir plus</a>
-    </div>
-    <div class="service-card">
-        <h2>Gynécologie</h2>
-        <p>Suivi gynécologique, prévention et traitement des pathologies féminines.</p>
-        <a href="gynecology.php" class="btn">En savoir plus</a>
-    </div>
-</div>
 
 <footer>
     <div class="footer-content">
@@ -160,4 +153,3 @@ $type = $_SESSION['type'];
 </body>
 
 </html>
-

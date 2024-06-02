@@ -179,7 +179,7 @@ $type = $_SESSION['type'];
             <ul>
                 <li><a href="index_client.php">Accueil</a></li>
                 <li><a href="toutparcourir_client.php" class="active">Tout Parcourir</a></li>
-                <li><a href="search.html">Recherche</a></li>
+                <li><a href="recherche.html">Recherche</a></li>
                 <li><a href="appointments.html">Rendez-vous</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropbtn">Votre Compte</a>
