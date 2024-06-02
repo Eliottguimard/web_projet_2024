@@ -75,58 +75,49 @@ if (!$medecin) {
         .dropdown:hover .dropdown-content {
             display: block;
         }
-        .chat-container, .cv-container {
-            width: 60%;
-            margin: 0 auto;
+        .cv-container {
+            background-color: #fff;
             padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: auto;
         }
 
-        .message-input {
-            width: calc(100% - 60px);
-            padding: 10px;
-            margin-right: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        .cv-container h2 {
+            margin-top: 0;
+            text-align: center;
         }
 
-        .send-button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        .cv-container p, .cv-container ul {
+            margin: 10px 0;
         }
 
-        .send-button:hover {
-            background-color: #0056b3;
+        .cv-container ul {
+            padding-left: 20px;
         }
 
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
+        .cv-container ul li {
+            margin-bottom: 5px;
         }
 
-        .close:hover, .close:focus {
-            color: black;
-            text-decoration: none;
+        .cv-container .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 24px;
             cursor: pointer;
         }
 
         .back-button {
-            padding: 10px 20px;
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
             background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            color: #fff;
             text-decoration: none;
-            display: inline-block;
+            border-radius: 5px;
             margin-top: 20px;
         }
 
@@ -164,7 +155,31 @@ if (!$medecin) {
 <div class="cv-container">
     <span class="close" onclick="window.location.href='toutparcourir_client.php';">&times;</span>
     <h2>CV de Dr. <?php echo htmlspecialchars($medecin['nom']); ?></h2>
-    <p><?php echo htmlspecialchars($medecin['cv']); ?></p>
+    <?php
+    // Assuming $medecin['cv'] contains properly formatted text
+    $cv = nl2br(htmlspecialchars($medecin['cv']));
+    $cv_lines = explode("<br />", $cv); // Split CV text into lines
+
+    echo "<p><strong>Nom:</strong> " . $cv_lines[0] . "</p>";
+    echo "<p><strong>Âge:</strong> " . $cv_lines[1] . "</p>";
+    echo "<p><strong>Email:</strong> <a href='mailto:" . $cv_lines[2] . "'>" . $cv_lines[2] . "</a></p>";
+    echo "<p><strong>Téléphone:</strong> " . $cv_lines[3] . "</p>";
+    echo "<p><strong>Adresse:</strong> " . $cv_lines[4] . "</p>";
+
+    echo "<h3>Formations:</h3>";
+    echo "<ul>";
+    for ($i = 7; $i <= 9; $i++) {
+        echo "<li>" . $cv_lines[$i] . "</li>";
+    }
+    echo "</ul>";
+
+    echo "<h3>Expériences:</h3>";
+    echo "<ul>";
+    for ($i = 12; $i <= 14; $i++) {
+        echo "<li>" . $cv_lines[$i] . "</li>";
+    }
+    echo "</ul>";
+    ?>
     <a href="affichage_generalistes.php" class="back-button">Retour à la liste des médecins</a>
 </div>
 

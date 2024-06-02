@@ -53,7 +53,24 @@ INSERT INTO clients (nom, prenom, adresse_ligne1, adresse_ligne2, ville, code_po
 
 INSERT INTO medecin (nom, prenom, specialite, telephone, email, adresse, cv, login, mdp, type) VALUES
 -- Médecins généralistes
-('Legrand', 'Sophie', 'Généraliste', '0612345678', 'sophie.legrand@example.com', '1 Rue de la Santé, Paris', 'Diplômée de la Faculté de Médecine de Paris. 10 ans d\'expérience en médecine générale.', 'sophie.legrand@example.com', 'password111', 'medecin'),
+('Legrand', 'Sophie', 'Généraliste', '0612345678', 'sophie.legrand@example.com', '1 Rue de la Santé, Paris', ' Sophie Legrand
+ 40 ans
+ sophie.legrand@example.com
+ 0612345678
+ 1 Rue de la Santé, Paris
+
+
+- Diplômée de la Faculté de Médecine de Paris (2004-2010)
+- Stage en médecine générale à l''''Hôpital Saint-Antoine, Paris (2010-2011)
+- Certificat en nutrition et diététique de l''''Université de Bordeaux (2012)
+
+
+- Médecin généraliste à la Clinique de la Santé, Paris (2011-présent)
+- Volontaire pour Médecins Sans Frontières en Afrique de l''''Ouest (2013-2014)
+- Conférencière sur la nutrition à l''''Université de Paris (2015-présent)
+- Consultante en santé publique pour l''''OMS (2016-2018)
+- Publication dans le Journal de Médecine Générale sur la gestion du diabète (2019)
+', 'sophie.legrand@example.com', 'password111', 'medecin'),
 ('Durand', 'Pierre', 'Généraliste', '0623456789', 'pierre.durand@example.com', '2 Avenue de la Santé, Lyon', 'Diplômé de la Faculté de Médecine de Lyon. 8 ans d\'expérience en médecine générale.', 'pierre.durand@example.com', 'password222', 'medecin'),
 ('Martin', 'Julie', 'Généraliste', '0634567890', 'julie.martin@example.com', '3 Boulevard de la Santé, Marseille', 'Diplômée de la Faculté de Médecine de Marseille. 7 ans d\'expérience en médecine générale.', 'julie.martin@example.com', 'password333', 'medecin'),
 ('Bernard', 'Luc', 'Généraliste', '0645678901', 'luc.bernard@example.com', '4 Rue de la Santé, Toulouse', 'Diplômé de la Faculté de Médecine de Toulouse. 9 ans d\'expérience en médecine générale.', 'luc.bernard@example.com', 'password444', 'medecin'),

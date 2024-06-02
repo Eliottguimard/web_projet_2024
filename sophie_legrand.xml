@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctor>
+    <education>
+        <degree>Diplôme de Médecine</degree>
+        <institution>Faculté de Médecine de Paris</institution>
+        <year>2010</year>
+    </education>
+    <experiences>
+        <experience>
+            <role>Médecin Généraliste</role>
+            <location>Cabinet Médical de Paris</location>
+            <years>2011-2021</years>
+        </experience>
+    </experiences>
+</doctor>
